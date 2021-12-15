@@ -32,6 +32,11 @@ function RegisterForm() {
         </h3>
       )}
       <div>
+        <center>
+          <img src="/images/logo.gif" />
+        </center>
+      </div>
+      <div>
         <label htmlFor="username">
           Username:
           <input
