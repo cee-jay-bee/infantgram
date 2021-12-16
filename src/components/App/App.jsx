@@ -20,6 +20,9 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import AddChildPage from '../AddChildPage/AddChildPage';
+import AddTeacherPage from '../AddTeacherPage/AddTeacherPage';
+import DailyFormPage from '../DailyFormPage/DailyFormPage';
+import TeacherPage from '../TeacherPage/TeacherPage';
 
 import './App.css';
 
@@ -58,7 +61,18 @@ function App() {
             exact
             path="/user"
           >
-            <UserPage />
+            {user.role === "teacher" ?
+              // If the user is already logged in, 
+              // redirect them to the /user page
+              
+              <Redirect to="/teacher" />
+              
+              :
+              // Otherwise, show the registration page
+              
+              <UserPage />
+              
+            }
           </ProtectedRoute>
 
           <ProtectedRoute
@@ -77,16 +91,53 @@ function App() {
             <AddChildPage />
           </ProtectedRoute>
 
+          <ProtectedRoute
+            // logged in shows AddChildPage else shows LoginPage
+            exact
+            path="/addteacher"
+          >
+            <AddTeacherPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/dailyform"
+          >
+            <DailyFormPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/teacher"
+          >
+            <TeacherPage />
+          </ProtectedRoute>
+
           <Route
             exact
             path="/login"
           >
+            {/* {()=>{
+              console.log("user", user);
+              if(user.role === "teacher"){
+                <Redirect to="/teacher" />
+              } else if(user.role === "parent"){
+                  <Redirect to="/user" />
+              } else {
+                  <LoginPage />
+                }
+              }
+            } */}
+            
+            
             {user.id ?
               // If the user is already logged in, 
-              // redirect to the /user page
+              // redirect them to the /user page
               <Redirect to="/user" />
               :
-              // Otherwise, show the login page
+              // Otherwise, show the registration page
               <LoginPage />
             }
           </Route>

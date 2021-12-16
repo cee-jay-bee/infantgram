@@ -54,9 +54,8 @@ function DailyForm() {
           <input
             type="text"
             name="firstName"
-            value={firstname}
             required
-            onChange={(event) => setFirstname(event.target.value)}
+            onChange={(event) => handleChange(event)}
           />
         </label>
       </div>
@@ -66,9 +65,8 @@ function DailyForm() {
           <input
             type="text"
             name="lastName"
-            value={lastname}
             required
-            onChange={(event) => setLastname(event.target.value)}
+            onChange={(event) => handleChange(event)}
           />
         </label>
       </div>
@@ -78,9 +76,8 @@ function DailyForm() {
           <input
             type="date"
             name="dateofbirth"
-            value={dateofbirth}
             required
-            onChange={(event) => setDateOfBirth(event.target.value)}
+            onChange={(event) => handleChange(event)}
           />
         </label>
       </div>
@@ -92,9 +89,8 @@ function DailyForm() {
             rows="4"
             cols="50"
             name="allergies"
-            value={allergies}
             required
-            onChange={(event) => setAllergies(event.target.value)}
+            onChange={(event) => handleChange(event)}
           />
         </label>
       </div>

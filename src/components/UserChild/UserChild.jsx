@@ -10,7 +10,7 @@ function UserChild(props) {
 
   const history = useHistory();
 
-  const goToForm = (childID) => {
+  const goToForm = () => {
     history.push('/dailyform');
   }
   
@@ -27,7 +27,7 @@ function UserChild(props) {
               component="img"
               height="300"
               image={props.child.image_path}
-              onClick={goToForm(props.child.id)}
+              onClick={goToForm}
             />
             <Typography variant="body2" color="textSecondary">Allergies: {props.child.allergies}</Typography>
             <br></br>

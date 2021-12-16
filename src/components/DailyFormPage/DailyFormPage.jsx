@@ -1,14 +1,14 @@
 import React from 'react';
 
 import { useHistory } from 'react-router-dom';
-import AddChildForm from '../AddChildForm/AddChildForm';
+import DailyForm from '../DailyForm/DailyForm';
 
 function AddChildPage() {
   const history = useHistory();
 
   return (
     <div>
-      <AddChildForm />
+      <DailyForm />
     </div>
   );
 }
