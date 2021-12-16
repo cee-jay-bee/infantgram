@@ -9,6 +9,10 @@
   overflow: hidden;
 }
 
+.navbar-custom {
+  height: 200px;
+}
+
 .nav a {
   text-decoration: none;
 }

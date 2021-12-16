@@ -8,7 +8,7 @@ function Nav() {
   const user = useSelector((store) => store.user);
 
   return (
-    <div className="nav">
+    <div className="nav navbar-custom">
       <Link to="/home">
         <h2 className="nav-title">Prime Solo Project</h2>
       </Link>
