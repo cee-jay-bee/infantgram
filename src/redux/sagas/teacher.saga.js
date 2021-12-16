@@ -12,9 +12,9 @@ function* fetchChild(action) {
   }
 }
 
-function* fetchChildren(action) {
+function* fetchChild(action) {
   try {
-    const response = yield axios.get(`/api/child/class/${action.payload}`);
+    const response = yield axios.get(`/api/child/${action.payload}`);
     
     yield put({ type: 'SET_CHILD', payload: response.data });
   } catch (error) {
@@ -40,7 +40,6 @@ function* addChild(action) {
 function* childSaga() {
   yield takeLatest('ADD_CHILD', addChild);
   yield takeLatest('FETCH_CHILD', fetchChild);
-  yield takeLatest('FETCH_CHILDREN', fetchChildren);
 }
 
 export default childSaga;

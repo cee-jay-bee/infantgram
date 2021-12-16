@@ -7,12 +7,26 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 // Handles Ajax request for user information if user is authenticated
-router.get('/', rejectUnauthenticated, (req, res) => {
+router.get('/class/:id', rejectUnauthenticated, (req, res) => {
   // Send back user object from the session (previously queried from the database)
+  console.log('req.params', req.params);
   
+  const query = `SELECT child.first_name, child.last_name, classroom.name, child.allergies, child.image_path, child.birth_date from "child"
+  JOIN "classroom" ON child.classroom_id = classroom.id
+  JOIN "user" ON "user".classroom_id = classroom.id
+  WHERE "user".id = ${req.params.id}`;
+  pool.query(query)
+    .then( result => {
+      console.log(result.rows);
+      res.send(result.rows);
+    })
+    .catch(err => {
+      console.log('ERROR: Get class children', err);
+      res.sendStatus(500)
+    })
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', rejectUnauthenticated, (req, res) => {
   // GET route code here
   console.log('req.params', req.params);
   

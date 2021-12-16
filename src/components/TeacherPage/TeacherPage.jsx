@@ -16,13 +16,14 @@ function TeacherPage() {
   };
 
   useEffect(() => {
-    dispatch({ type: 'FETCH_CHILD', payload: user.id });
+    dispatch({ type: 'FETCH_CHILDREN', payload: user.id });
 }, []);
 
   return (
     
     <div>
       <p>TEACHER PAGE</p>
+      <p>{JSON.stringify(child)}</p>
     </div>
   )
 }
