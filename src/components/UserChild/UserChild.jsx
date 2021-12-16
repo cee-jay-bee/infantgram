@@ -7,7 +7,12 @@ import { Typography, Grid, Container, Box, Button, Table, TableHead, TableBody, 
 
 
 function UserChild(props) {
-  
+
+  const history = useHistory();
+
+  const goToForm = (childID) => {
+    history.push('/dailyform');
+  }
   
 
   return (
@@ -22,8 +27,9 @@ function UserChild(props) {
               component="img"
               height="300"
               image={props.child.image_path}
+              onClick={goToForm(props.child.id)}
             />
-            <Typography variant="body2" color="text.secondary">{props.child.allergies}</Typography>
+            <Typography variant="body2" color="textSecondary">Allergies: {props.child.allergies}</Typography>
             <br></br>
           </Card>
         </Grid>

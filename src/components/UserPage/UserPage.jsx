@@ -22,14 +22,21 @@ function UserPage() {
   return (
     
     <div className="container">
-      <h2>Welcome, {user.first_name}!</h2>
+      <div className="grid">
+        <div className="grid-col grid-col_10">
+        <h2>Welcome, {user.first_name}!</h2>
       <ul>
         <li>
           {child.map(child =>(<UserChild child={child} />))}
         </li>
       </ul>
-      <button className="btn" onClick={onAddChild} >Add Child</button>
-      <LogOutButton className="btn" />
+        </div>
+        <div className="grid-col grid-col_2">
+          <center>
+            <button className="btn" onClick={onAddChild} >Add Child</button>
+          </center>
+        </div>
+      </div>
     </div>
   );
 }
