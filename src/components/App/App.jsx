@@ -61,7 +61,7 @@ function App() {
             exact
             path="/user"
           >
-            {user.role === "teacher" ?
+            {(user.role === "teacher") ?
               // If the user is already logged in, 
               // redirect them to the /user page
               
@@ -119,19 +119,6 @@ function App() {
             exact
             path="/login"
           >
-            {/* {()=>{
-              console.log("user", user);
-              if(user.role === "teacher"){
-                <Redirect to="/teacher" />
-              } else if(user.role === "parent"){
-                  <Redirect to="/user" />
-              } else {
-                  <LoginPage />
-                }
-              }
-            } */}
-            
-            
             {user.id ?
               // If the user is already logged in, 
               // redirect them to the /user page
