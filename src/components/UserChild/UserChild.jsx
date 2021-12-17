@@ -18,8 +18,8 @@ function UserChild(props) {
   return (
     
     <div>
-      
-      <Box sx={{boxShadow: 3}} m={2} pt={1} >
+      <h1>{JSON.stringify(props)}</h1>
+      {/* <Box sx={{boxShadow: 3}} m={2} pt={1} >
         <Grid item sx={4} >
           <Card sx={{ maxWidth: 400 }}>
             <Typography gutterBottom variant="h5" component="div">{props.child.first_name} {props.child.last_name}</Typography>
@@ -33,7 +33,7 @@ function UserChild(props) {
             <br></br>
           </Card>
         </Grid>
-      </Box>
+      </Box> */}
     </div>
   );
 }

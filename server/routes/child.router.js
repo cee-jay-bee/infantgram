@@ -9,9 +9,8 @@ const router = express.Router();
 // Handles Ajax request for user information if user is authenticated
 router.get('/class/:id', rejectUnauthenticated, (req, res) => {
   // Send back user object from the session (previously queried from the database)
-  console.log('req.params', req.params);
   
-  const query = `SELECT child.first_name, child.last_name, classroom.name, child.allergies, child.image_path, child.birth_date from "child"
+  const query = `SELECT child.first_name, child.last_name, classroom.classroom_name, child.allergies, child.image_path, child.birth_date from "child"
   JOIN "classroom" ON child.classroom_id = classroom.id
   JOIN "user" ON "user".classroom_id = classroom.id
   WHERE "user".id = ${req.params.id}`;

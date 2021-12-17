@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import {useSelector, useDispatch} from 'react-redux';
 import {useHistory} from 'react-router-dom';
+import UserChild from '../UserChild/UserChild';
 
 
 function TeacherPage() {
@@ -11,19 +12,21 @@ function TeacherPage() {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const onAddChild = (event) => {
-    history.push('/addchild');
-  };
 
   useEffect(() => {
+    console.log("user is:", user);
     dispatch({ type: 'FETCH_CHILDREN', payload: user.id });
-}, []);
+  }, []);
 
   return (
     
     <div>
-      <p>TEACHER PAGE</p>
-      <p>{JSON.stringify(child)}</p>
+      <h1>{child[0].classroom_name} Classroom</h1>
+      <ul>
+        <li>
+          {child.map(child =>(<UserChild child={child} />))}
+        </li>
+      </ul>
     </div>
   )
 }

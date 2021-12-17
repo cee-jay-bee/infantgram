@@ -13,9 +13,11 @@ function* fetchChild(action) {
 }
 
 function* fetchChildren(action) {
+  console.log(action.payload);
+  
   try {
     const response = yield axios.get(`/api/child/class/${action.payload}`);
-    
+    console.log(response);
     yield put({ type: 'SET_CHILD', payload: response.data });
   } catch (error) {
     console.log('Child get request failed', error);
