@@ -3,6 +3,8 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 import {useSelector, useDispatch} from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import UserChild from '../UserChild/UserChild';
+import {Container} from 'react-bootstrap';
+import "../UserPage/UserPage.css";
 
 
 function TeacherPage() {
@@ -12,6 +14,7 @@ function TeacherPage() {
   const history = useHistory();
   const dispatch = useDispatch();
 
+  
 
   useEffect(() => {
     console.log("user is:", user);
@@ -20,14 +23,15 @@ function TeacherPage() {
 
   return (
     
-    <div>
-      <h1>Classroom</h1>
-      <ul>
-        <li>
-          {child.map(child =>(<UserChild child={child} />))}
-        </li>
-      </ul>
-    </div>
+    <main>
+      <Container>
+        <h2>Classroom</h2>
+
+        <section className="children">
+          {child.map(child =>(<UserChild key={child.id} child={child} />))}
+        </section>
+      </Container>
+    </main>
   )
 }
 

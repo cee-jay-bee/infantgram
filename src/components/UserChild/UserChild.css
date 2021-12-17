@@ -1,0 +1,20 @@
+.childCard{
+    transition: .2s;
+    background-color: #28313C !important;
+    color: white;
+    font-family: Neue-Helvetica;
+    text-transform:capitalize;
+    margin: 10px 0px;
+}
+
+.childCard:hover{
+    border: 5px solid #09a99e;
+    transition: .2s;
+    cursor: pointer;
+}
+
+img{
+  height: 200px;
+  width: 200px;
+  object-fit: cover;  /* <--- maintains the aspect ratio of the image when width & height are different */
+}

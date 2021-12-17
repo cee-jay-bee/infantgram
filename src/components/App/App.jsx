@@ -62,13 +62,13 @@ function App() {
             path="/user"
           >
             {(user.role === "teacher") ?
-              // If the user is already logged in, 
-              // redirect them to the /user page
+              // If the user is logged in as a teacher, 
+              // redirect them to the teacher page
               
               <Redirect to="/teacher" />
               
               :
-              // Otherwise, show the registration page
+              // Otherwise, show the user page
               
               <UserPage />
               
@@ -92,7 +92,7 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows AddChildPage else shows LoginPage
+            // logged in shows AddTeacherPage else shows LoginPage
             exact
             path="/addteacher"
           >
@@ -100,7 +100,7 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
+            // logged in shows DailyForm else shows LoginPage
             exact
             path="/dailyform"
           >
@@ -108,7 +108,7 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
+            // logged in shows TeacherPage else shows LoginPage
             exact
             path="/teacher"
           >
@@ -124,7 +124,7 @@ function App() {
               // redirect them to the /user page
               <Redirect to="/user" />
               :
-              // Otherwise, show the registration page
+              // Otherwise, show the login page
               <LoginPage />
             }
           </Route>

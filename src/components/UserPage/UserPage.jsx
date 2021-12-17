@@ -3,6 +3,9 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 import {useSelector, useDispatch} from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import UserChild from '../UserChild/UserChild';
+import {Container} from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
+import "./UserPage.css";
 
 function UserPage() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
@@ -11,7 +14,7 @@ function UserPage() {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const onAddChild = (event) => {
+  const addChild = (event) => {
     history.push('/addchild');
   };
 
@@ -20,24 +23,17 @@ function UserPage() {
 }, []);
 
   return (
-    
-    <div className="container">
-      <div className="grid">
-        <div className="grid-col grid-col_10">
-          <h2>Welcome, {user.first_name}!</h2>
-          <ul>
-            <li>
-              {child.map(child =>(<UserChild child={child} />))}
-            </li>
-          </ul>
-        </div>
-        <div className="grid-col grid-col_2">
-          <center>
-            <button className="btn" onClick={onAddChild} >Add Child</button>
-          </center>
-        </div>
-      </div>
-    </div>
+    <main>
+      <Container>
+        <h2>Welcome, {user.first_name}!</h2>
+
+        <Button onClick={addChild}>add child</Button>
+        <section className="children">
+          {child.map(child =>(<UserChild key={child.id} child={child} />))}
+        </section>
+      </Container>
+    </main>
+
   );
 }
 
