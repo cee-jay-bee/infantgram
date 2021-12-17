@@ -2,27 +2,18 @@ import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
 // worker Saga: will be fired on "FETCH_USER" actions
-function* fetchChild(action) {
+function* fetchForm(action) {
+  console.log(action.payload);
   try {
-    const response = yield axios.get(`/api/child/${action.payload}`);
+    const response = yield axios.get(`/api/form/${action.payload}`);
     
-    yield put({ type: 'SET_CHILD', payload: response.data });
+    yield put({ type: 'SET_FORM', payload: response.data });
   } catch (error) {
     console.log('Child get request failed', error);
   }
 }
 
-function* fetchChild(action) {
-  try {
-    const response = yield axios.get(`/api/child/${action.payload}`);
-    
-    yield put({ type: 'SET_CHILD', payload: response.data });
-  } catch (error) {
-    console.log('Child get request failed', error);
-  }
-}
-
-function* addChild(action) {
+function* addForm(action) {
   try {
     console.log(action.payload);
     const response = yield axios.post('/api/child', action.payload);
@@ -37,9 +28,9 @@ function* addChild(action) {
 }
 
 
-function* childSaga() {
-  yield takeLatest('ADD_CHILD', addChild);
-  yield takeLatest('FETCH_CHILD', fetchChild);
+function* formSaga() {
+  yield takeLatest('ADD_FORM', addForm);
+  yield takeLatest('FETCH_FORM', fetchForm);
 }
 
-export default childSaga;
+export default formSaga;

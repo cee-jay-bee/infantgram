@@ -21,7 +21,7 @@ function TeacherPage() {
   return (
     
     <div>
-      <h1>{child[0].classroom_name} Classroom</h1>
+      <h1>Classroom</h1>
       <ul>
         <li>
           {child.map(child =>(<UserChild child={child} />))}

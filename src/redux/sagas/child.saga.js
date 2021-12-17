@@ -13,7 +13,7 @@ function* fetchChild(action) {
 }
 
 function* fetchChildren(action) {
-  console.log(action.payload);
+  
   
   try {
     const response = yield axios.get(`/api/child/class/${action.payload}`);
@@ -26,7 +26,7 @@ function* fetchChildren(action) {
 
 function* addChild(action) {
   try {
-    console.log(action.payload);
+    
     const response = yield axios.post('/api/child', action.payload);
 
     // now that the session has given us a user object
