@@ -3,7 +3,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import DailyForm from '../DailyForm/DailyForm';
 
-function AddChildPage() {
+function DailyFormPage() {
   const history = useHistory();
 
   return (
@@ -13,4 +13,4 @@ function AddChildPage() {
   );
 }
 
-export default AddChildPage;
+export default DailyFormPage;

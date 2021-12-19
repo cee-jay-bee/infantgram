@@ -16,12 +16,12 @@ function* fetchForm(action) {
 function* addForm(action) {
   try {
     console.log(action.payload);
-    const response = yield axios.post('/api/child', action.payload);
+    const response = yield axios.post('/api/form', action.payload);
 
     // now that the session has given us a user object
     // with an id and username set the client-side user object to let
     // the client-side code know the user is logged in
-    yield put({ type: 'FETCH_CHILD', payload: action.payload.parentID})
+    yield put({ type: 'FETCH_FORM', })
   } catch (error) {
     console.log('Child Post request failed', error);
   }

@@ -18,7 +18,7 @@ function UserChild(props) {
     console.log(childID);
 
     dispatch({type: 'FETCH_FORM', payload: childID})
-    // history.push('/dailyform');
+    history.push('/dailyform');
   }
   
 
