@@ -1,14 +1,15 @@
 import React from 'react';
 
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import DailyForm from '../DailyForm/DailyForm';
 
 function DailyFormPage() {
   const history = useHistory();
+  const location = useLocation();
 
   return (
     <div>
-      <DailyForm />
+      <DailyForm child={location.state} />
     </div>
   );
 }

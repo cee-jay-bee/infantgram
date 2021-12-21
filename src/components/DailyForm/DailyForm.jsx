@@ -3,11 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 
-function DailyForm() {
+function DailyForm(props) {
   const dispatch = useDispatch();
   const history = useHistory();
+
+  const errors = useSelector((store) => store.errors);
+  const user = useSelector((store) => store.user);
+  const child = useSelector((store)=> store.child);
  
-  const[ newDailyForm, setNewDailyForm ] = useState( { } );
+  const[ newDailyForm, setNewDailyForm ] = useState( { childID: props.child} );
   let needsArr = [];
   let feelsArr = [];
   
@@ -28,10 +32,6 @@ function DailyForm() {
     feelsArr.push(event.target.id);
     console.log(feelsArr);
   }
-  
-  const errors = useSelector((store) => store.errors);
-  const user = useSelector((store) => store.user);
-  const child = useSelector((store)=> store.child);
 
   const addDailyForm = (event) => {
     event.preventDefault();
@@ -53,6 +53,7 @@ function DailyForm() {
   }; // end registerUser
 
   return (
+    
     <form className="formPanel" onSubmit={addDailyForm}>
       <h2>Daily Form </h2>
       {errors.registrationMessage && (
@@ -327,6 +328,7 @@ function DailyForm() {
       <div>
         <input className="btn" type="submit" name="submit" value="Add Form" />
       </div>
+      <p>{JSON.stringify(props)}</p>
     </form>
   );
 }

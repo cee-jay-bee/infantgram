@@ -1,31 +1,31 @@
 import axios from 'axios';
-import { put, takeLatest } from 'redux-saga/effects';
+import { actionChannel, put, takeLatest } from 'redux-saga/effects';
 
 // worker Saga: will be fired on "FETCH_USER" actions
 function* fetchForm(action) {
-  console.log(action.payload);
+  console.log(action);
   try {
     const response = yield axios.get(`/api/form/${action.payload}`);
     
-    yield put({ type: 'SET_FORM', payload: response.data });
+    yield put({ type: 'SET_FORM', payload: response.data});
   } catch (error) {
     console.log('Child get request failed', error);
   }
 }
 
 function* addForm(action) {
-  console.log(action.payload);
-  // try {
+  console.log("saga action.payload", action.payload.dailyForm.childID);
+  try {
     
-  //   const response = yield axios.post('/api/form', action.payload);
+    const response = yield axios.post('/api/form', action.payload);
 
-  //   // now that the session has given us a user object
-  //   // with an id and username set the client-side user object to let
-  //   // the client-side code know the user is logged in
-  //   yield put({ type: 'FETCH_FORM', })
-  // } catch (error) {
-  //   console.log('Child Post request failed', error);
-  // }
+    // now that the session has given us a user object
+    // with an id and username set the client-side user object to let
+    // the client-side code know the user is logged in
+    yield put({ type: 'FETCH_FORM', payload: action.payload.dailyForm.childID })
+  } catch (error) {
+    console.log('Child Post request failed', error);
+  }
 }
 
 

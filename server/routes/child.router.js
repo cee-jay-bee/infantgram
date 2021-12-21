@@ -27,7 +27,6 @@ router.get('/class/:id', rejectUnauthenticated, (req, res) => {
 
 router.get('/:id', rejectUnauthenticated, (req, res) => {
   // GET route code here
-  console.log('req.params', req.params);
   
   const query = `SELECT * FROM "child" WHERE parent_id = ${req.params.id}`;
   pool.query(query)
