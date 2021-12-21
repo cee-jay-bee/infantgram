@@ -5,26 +5,28 @@ import { useHistory } from 'react-router-dom';
 
 function DailyForm() {
   const dispatch = useDispatch();
-  let needsArray = [];
+  const history = useHistory();
  
-  const[ dailyForm, setDailyForm ] = useState( { } );
+  const[ newDailyForm, setNewDailyForm ] = useState( { } );
+  let needsArr = [];
+  let feelsArr = [];
+  
 
     //By using event.target.id, we can know which form property is being changed. Therefore, we only
     //need one function to handle the change on all input texts on the screen.
   const handleChange = ( event ) =>{
-      setDailyForm( {...dailyForm, [ event.target.id ] : event.target.value  } );
+      setNewDailyForm( {...newDailyForm, [ event.target.id ] : event.target.value  } );
       
   }
 
-  const handleRadioChange = (event) => {
-    
-    if (event.target.value === "on"){
-      console.log(needsArray, "needs Array before");
-      needsArray.push(event.target.id);
-      console.log(needsArray, "check Array after");
-    }
+  const handleNeedsChange = (event) => {
+    needsArr.push(event.target.id);
+    console.log(needsArr);
+  }
 
-    setDailyForm( {...dailyForm, [ event.target.name ] : needsArray})
+  const handleFeelsChange = (event) => {
+    feelsArr.push(event.target.id);
+    console.log(feelsArr);
   }
   
   const errors = useSelector((store) => store.errors);
@@ -34,16 +36,20 @@ function DailyForm() {
   const addDailyForm = (event) => {
     event.preventDefault();
 
-    console.log(dailyForm);
+    console.log(newDailyForm);
+    console.log(needsArr);
+    console.log(feelsArr);
 
-    // dispatch({
-    //   type: 'ADD_FORM',
-    //   payload: {
-    //     dailyForm
-    //   },
-    // });
+    dispatch({
+      type: 'ADD_FORM',
+      payload: {
+        dailyForm: newDailyForm,
+        babyNeeds: needsArr,
+        babyFeels: feelsArr
+      },
+    });
 
-    // history.push('/user');
+    history.push('/user');
   }; // end registerUser
 
   return (
@@ -238,44 +244,44 @@ function DailyForm() {
             type="checkbox"
             name="babyNeeds"
             id="diapers"
-            onChange={(event) => handleRadioChange(event)}
+            onChange={(event) => handleNeedsChange(event)}
           />
-          <label for="Diapers">Diapers</label>
+          <label htmlFor="Diapers">Diapers</label>
           <input
             type="checkbox"
             name="babyNeeds"
             id="wipes"
-            onChange={(event) => handleRadioChange(event)}
+            onChange={(event) => handleNeedsChange(event)}
           />
-          <label for="wipes">Wipes</label>
+          <label htmlFor="wipes">Wipes</label>
           <input
             type="checkbox"
             name="babyNeeds"
             id="diaperCream"
-            onChange={(event) => handleRadioChange(event)}
+            onChange={(event) => handleNeedsChange(event)}
           />
-          <label for="Diaper_Cream">Diaper Cream</label>
+          <label htmlFor="Diaper_Cream">Diaper Cream</label>
           <input
             type="checkbox"
             name="babyNeeds"
             id="formula"
-            onChange={(event) => handleRadioChange(event)}
+            onChange={(event) => handleNeedsChange(event)}
           />
-          <label for="formula">Formula</label>
+          <label htmlFor="formula">Formula</label>
           <input
             type="checkbox"
             name="babyNeeds"
             id="fingerFood"
-            onChange={(event) => handleRadioChange(event)}
+            onChange={(event) => handleNeedsChange(event)}
           />
-          <label for="fingerFood">Finger Food</label>
+          <label htmlFor="fingerFood">Finger Food</label>
           <input
             type="checkbox"
             name="babyNeeds"
             id="extraClothes"
-            onChange={(event) => handleRadioChange(event)}
+            onChange={(event) => handleNeedsChange(event)}
           />
-          <label for="extraClothes">Extra Clothes</label>
+          <label htmlFor="extraClothes">Extra Clothes</label>
         </label>
       </div>
       <div>
@@ -285,37 +291,37 @@ function DailyForm() {
             type="checkbox"
             name="babyFeels"
             id="happy"
-            onChange={(event) => handleRadioChange(event)}
+            onChange={(event) => handleFeelsChange(event)}
           />
-          <label for="happy">Happy</label>
+          <label htmlFor="happy">Happy</label>
           <input
             type="checkbox"
             name="babyFeels"
             id="usual"
-            onChange={(event) => handleRadioChange(event)}
+            onChange={(event) => handleFeelsChange(event)}
           />
-          <label for="usual">Usual</label>
+          <label htmlFor="usual">Usual</label>
           <input
             type="checkbox"
             name="babyFeels"
             id="sensitive"
-            onChange={(event) => handleRadioChange(event)}
+            onChange={(event) => handleFeelsChange(event)}
           />
-          <label for="sensitive">Sensitive</label>
+          <label htmlFor="sensitive">Sensitive</label>
           <input
             type="checkbox"
             name="babyFeels"
             id="tired"
-            onChange={(event) => handleRadioChange(event)}
+            onChange={(event) => handleFeelsChange(event)}
           />
-          <label for="tired">Tired</label>
+          <label htmlFor="tired">Tired</label>
           <input
             type="checkbox"
             name="babyFeels"
             id="active"
-            onChange={(event) => handleRadioChange(event)}
+            onChange={(event) => handleFeelsChange(event)}
           />
-          <label for="active">Active</label>
+          <label htmlFor="active">Active</label>
         </label>
       </div>
       <div>
