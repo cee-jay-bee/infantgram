@@ -1,9 +1,10 @@
 const formReducer = (state = {}, action) => {
+  console.log(action.payload);
   switch (action.type) {
     case 'SET_FORM':
       return action.payload;
     case 'UNSET_FORM':
-      return [];
+      return {};
     default:
       return state;
   }

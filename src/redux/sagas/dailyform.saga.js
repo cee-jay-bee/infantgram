@@ -3,7 +3,7 @@ import { actionChannel, put, takeLatest } from 'redux-saga/effects';
 
 // worker Saga: will be fired on "FETCH_USER" actions
 function* fetchForm(action) {
-  console.log(action);
+  console.log("fetchform:", action);
   try {
     const response = yield axios.get(`/api/form/${action.payload}`);
     

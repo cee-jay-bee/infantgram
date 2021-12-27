@@ -61,14 +61,13 @@ router.post('/', (req, res) => {
   const queryText = `INSERT INTO "daily_forms" (date, wakeup, child_id, breakfast, breakfast_food, parent_comments, 
     diaper_change_time, pickup_time, feeding_information, bottles, naps, diapers, needs, feelings, teacher_comments)
   VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING id`;
-  pool.query(queryText, [today, wakeup, childID, breakfast, breakfastFood, parentComments, diaperChangeTime, pickupTime, feedingInfo,
-  bottles, naps, diapers, needs, feelings, teacherComments])
+  pool.query(queryText, today, wakeup, childID, breakfast, breakfastFood, parentComments, diaperChangeTime, pickupTime, feedingInfo,
+  bottles, naps, diapers, needs, feelings, teacherComments)
     .then( result => {
-      console.log(result.rows);
       res.send(result.rows);
     })
     .catch(err => {
-      console.log('ERROR: Get class children', err);
+      console.log('ERROR: Get form', err);
       res.sendStatus(500)
     })
 });

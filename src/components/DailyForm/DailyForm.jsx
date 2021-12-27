@@ -10,10 +10,17 @@ function DailyForm(props) {
   const errors = useSelector((store) => store.errors);
   const user = useSelector((store) => store.user);
   const child = useSelector((store)=> store.child);
+  const dailyForm = useSelector((store) => store.dailyForm)
+  const [time, setNewTime] = useState( '13:15');
+ 
  
   const[ newDailyForm, setNewDailyForm ] = useState( { childID: props.child} );
   let needsArr = [];
   let feelsArr = [];
+
+  const setDefaults = () => {
+
+  }
   
 
     //By using event.target.id, we can know which form property is being changed. Therefore, we only
@@ -328,7 +335,7 @@ function DailyForm(props) {
       <div>
         <input className="btn" type="submit" name="submit" value="Add Form" />
       </div>
-      <p>{JSON.stringify(props)}</p>
+      <p>{JSON.stringify(dailyForm[0]["wakeup"])}</p>
     </form>
   );
 }
