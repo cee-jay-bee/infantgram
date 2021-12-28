@@ -14,10 +14,14 @@ function UserChild(props) {
   const dispatch = useDispatch();
   const classes = useStyles();
 
+  useEffect(()=>{ 
+    dispatch({type: 'UNSET_FORM'});
+  }, []);
+
   const getForm = (childID) => {
     console.log(childID);
 
-    dispatch({type: 'FETCH_FORM', payload: childID})
+    dispatch({type: 'FETCH_FORM', payload: childID});
     history.push({
       pathname: '/dailyform',
       state: props.child.id

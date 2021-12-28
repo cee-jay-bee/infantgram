@@ -80,6 +80,7 @@ function DailyForm(props) {
             type="time"
             name="wakeUp"
             id="wakeup"
+            value={dailyForm[0].wakeup}
             required
             onChange={(event) => handleChange(event)}
           />
@@ -92,6 +93,7 @@ function DailyForm(props) {
             type="time"
             name="breakfastTime"
             id="breakfastTime"
+            value={dailyForm[0].breakfast}
             required
             onChange={(event) => handleChange(event)}
           />
@@ -104,6 +106,7 @@ function DailyForm(props) {
             type="text"
             name="breakfastFood"
             id="breakfastFood"
+            value={dailyForm[0].breakfast_food}
             required
             onChange={(event) => handleChange(event)}
           />
@@ -116,6 +119,7 @@ function DailyForm(props) {
             type="time"
             name="diaperChange"
             id="diaperChange"
+            value={dailyForm[0].diaper_change_time}
             required
             onChange={(event) => handleChange(event)}
           />
@@ -128,6 +132,7 @@ function DailyForm(props) {
             type="time"
             name="pickupTime"
             id="pickupTime"
+            value={dailyForm[0].pickup_time}
             required
             onChange={(event) => handleChange(event)}
           />
@@ -140,6 +145,7 @@ function DailyForm(props) {
             type="text"
             name="parentComments"
             id="parentComments"
+            value={dailyForm[0].parent_comments}
             onChange={(event) => handleChange(event)}
           />
         </label>
@@ -222,7 +228,7 @@ function DailyForm(props) {
         </label>
       </div>
       <div>
-        <label htmlFor="bottleAmount">
+        <label htmlFor="diaperKind">
           Diaper Type:
           <input
             type="text"
@@ -241,6 +247,7 @@ function DailyForm(props) {
             cols="50"
             name="teacherComments"
             id="teacherComments"
+            value={dailyForm[0].teacher_comments}
             onChange={(event) => handleChange(event)}
           />
         </label>
@@ -333,9 +340,13 @@ function DailyForm(props) {
         </label>
       </div>
       <div>
-        <input className="btn" type="submit" name="submit" value="Add Form" />
+      {
+        dailyForm[0].wakeup === null ?
+          <input className="btn" type="submit" name="submit" value="Add Form" /> :
+          <input className="btn" type="submit" name="edit" value="Edit Form" />
+      }
       </div>
-      <p>{JSON.stringify(dailyForm[0]["wakeup"])}</p>
+      {/* <p>{JSON.stringify(dailyForm[0].wakeup)}</p> */}
     </form>
   );
 }
