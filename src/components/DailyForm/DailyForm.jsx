@@ -44,15 +44,26 @@ function DailyForm(props) {
     console.log(newDailyForm);
     console.log(needsArr);
     console.log(feelsArr);
-
-    // dispatch({
-    //   type: 'ADD_FORM',
-    //   payload: {
-    //     dailyForm: newDailyForm,
-    //     babyNeeds: needsArr,
-    //     babyFeels: feelsArr
-    //   },
-    // });
+    if (newDailyForm.id){
+      // dispatch({
+      //   type: 'UPDATE_FORM',
+      //   payload: {
+      //     dailyForm: newDailyForm,
+      //   },
+      // });
+      console.log("test Update");
+    } else {
+      dispatch({
+        type: 'ADD_FORM',
+        payload: {
+          dailyForm: newDailyForm,
+          babyNeeds: needsArr,
+          babyFeels: feelsArr
+        },
+      });
+      console.log("test add");
+    }
+    
 
     // history.push('/user');
   }; // end registerUser
@@ -338,7 +349,11 @@ function DailyForm(props) {
         </label>
       </div>
       <div>
-          <input className="btn" type="submit" name="submit" value="Add Form" />
+        {
+          dailyForm.wakeup ?
+            <input className="btn" type="submit" name="edit" value="Edit Form" /> :
+            <input className="btn" type="submit" name="submit" value="Add Form" />
+        }
       </div>
     </form>
   );
