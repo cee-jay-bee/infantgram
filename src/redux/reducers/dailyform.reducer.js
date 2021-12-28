@@ -1,5 +1,5 @@
 const formReducer = (state = 
-    [{wakeup: null,
+    {wakeup: null,
     breakfast: null,
     breakfast_food: null,
     parent_comments: null,
@@ -11,17 +11,16 @@ const formReducer = (state =
     needs: null,
     feelings: null,
     teacher_comments: null,
-    feeding_information: null}], action) => {
-        console.log(action.payload);
+    feeding_information: null}, action) => {
         switch (action.type) {
           case 'SET_FORM':
           if (action.payload.length === 0) {
             return state;
           } else {
-            return action.payload;
+            return action.payload[0];
           }
           case 'UNSET_FORM':
-            return [{wakeup: null,
+            return {wakeup: null,
               breakfast: null,
               breakfast_food: null,
               parent_comments: null,
@@ -33,7 +32,7 @@ const formReducer = (state =
               needs: null,
               feelings: null,
               teacher_comments: null,
-              feeding_information: null}];
+              feeding_information: null};
           default:
             return state;
   }

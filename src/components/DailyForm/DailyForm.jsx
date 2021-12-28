@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
@@ -10,23 +10,21 @@ function DailyForm(props) {
   const errors = useSelector((store) => store.errors);
   const user = useSelector((store) => store.user);
   const child = useSelector((store)=> store.child);
-  const dailyForm = useSelector((store) => store.dailyForm)
-  const [time, setNewTime] = useState( '13:15');
+  const dailyForm = useSelector((store) => store.dailyForm);
  
- 
-  const[ newDailyForm, setNewDailyForm ] = useState( { childID: props.child} );
+  const [ newDailyForm, setNewDailyForm ] = useState( {} );
   let needsArr = [];
   let feelsArr = [];
 
-  const setDefaults = () => {
-
-  }
-  
+  useEffect(()=> {
+    setNewDailyForm({...dailyForm, childID: props.child});
+  }, [dailyForm]);
 
     //By using event.target.id, we can know which form property is being changed. Therefore, we only
     //need one function to handle the change on all input texts on the screen.
   const handleChange = ( event ) =>{
-      setNewDailyForm( {...newDailyForm, [ event.target.id ] : event.target.value  } );
+    
+    setNewDailyForm( {...newDailyForm, [ event.target.id ] : event.target.value  } );
       
   }
 
@@ -40,28 +38,28 @@ function DailyForm(props) {
     console.log(feelsArr);
   }
 
-  const addDailyForm = (event) => {
+  const changeDailyForm = (event) => {
     event.preventDefault();
 
     console.log(newDailyForm);
     console.log(needsArr);
     console.log(feelsArr);
 
-    dispatch({
-      type: 'ADD_FORM',
-      payload: {
-        dailyForm: newDailyForm,
-        babyNeeds: needsArr,
-        babyFeels: feelsArr
-      },
-    });
+    // dispatch({
+    //   type: 'ADD_FORM',
+    //   payload: {
+    //     dailyForm: newDailyForm,
+    //     babyNeeds: needsArr,
+    //     babyFeels: feelsArr
+    //   },
+    // });
 
-    history.push('/user');
+    // history.push('/user');
   }; // end registerUser
 
   return (
     
-    <form className="formPanel" onSubmit={addDailyForm}>
+    <form className="formPanel" onSubmit={changeDailyForm}>
       <h2>Daily Form </h2>
       {errors.registrationMessage && (
         <h3 className="alert" role="alert">
@@ -74,78 +72,78 @@ function DailyForm(props) {
         </center>
       </div>
       <div>
-        <label htmlFor="wakeUp">
+        <label htmlFor="wakeup">
           Wakeup Time:
           <input
             type="time"
-            name="wakeUp"
+            name="wakeup"
             id="wakeup"
-            value={dailyForm[0].wakeup}
+            value={dailyForm.wakeup}
             required
             onChange={(event) => handleChange(event)}
           />
         </label>
       </div>
       <div>
-        <label htmlFor="breakfastTime">
+        <label htmlFor="breakfast">
           Breakfast Time:
           <input
             type="time"
-            name="breakfastTime"
-            id="breakfastTime"
-            value={dailyForm[0].breakfast}
+            name="breakfast"
+            id="breakfast"
+            value={dailyForm.breakfast}
             required
             onChange={(event) => handleChange(event)}
           />
         </label>
       </div>
       <div>
-        <label htmlFor="breakfastFood">
+        <label htmlFor="breakfast_food">
           Breakfast Food:
           <input
             type="text"
-            name="breakfastFood"
-            id="breakfastFood"
-            value={dailyForm[0].breakfast_food}
+            name="breakfast_food"
+            id="breakfast_food"
+            value={dailyForm.breakfast_food}
             required
             onChange={(event) => handleChange(event)}
           />
         </label>
       </div>
       <div>
-        <label htmlFor="diaperChangeTime">
+        <label htmlFor="diaper_change_time">
           Diaper Change Time:
           <input
             type="time"
-            name="diaperChange"
-            id="diaperChange"
-            value={dailyForm[0].diaper_change_time}
+            name="diaper_change_time"
+            id="diaper_change_time"
+            value={dailyForm.diaper_change_time}
             required
             onChange={(event) => handleChange(event)}
           />
         </label>
       </div>
       <div>
-        <label htmlFor="pickupTime">
+        <label htmlFor="pickup_time">
           Pickup Time:
           <input
             type="time"
-            name="pickupTime"
-            id="pickupTime"
-            value={dailyForm[0].pickup_time}
+            name="pickup_time"
+            id="pickup_time"
+            value={dailyForm.pickup_time}
             required
             onChange={(event) => handleChange(event)}
           />
         </label>
       </div>
       <div>
-        <label htmlFor="parentComments">
+        <label htmlFor="parent_comments">
           Special Instructions:
           <input
             type="text"
-            name="parentComments"
-            id="parentComments"
-            value={dailyForm[0].parent_comments}
+            name="parent_comments"
+            id="parent_comments"
+            value={dailyForm.parent_comments}
             onChange={(event) => handleChange(event)}
           />
         </label>
@@ -239,15 +237,15 @@ function DailyForm(props) {
         </label>
       </div>
       <div>
-        <label htmlFor="teacherComments">
+        <label htmlFor="teacher_comments">
           Teacher Comments:
           <textarea
             type="text"
             rows="4"
             cols="50"
-            name="teacherComments"
-            id="teacherComments"
-            value={dailyForm[0].teacher_comments}
+            name="teacher_comments"
+            id="teacher_comments"
+            value={dailyForm.teacher_comments}
             onChange={(event) => handleChange(event)}
           />
         </label>
@@ -340,13 +338,8 @@ function DailyForm(props) {
         </label>
       </div>
       <div>
-      {
-        dailyForm[0].wakeup === null ?
-          <input className="btn" type="submit" name="submit" value="Add Form" /> :
-          <input className="btn" type="submit" name="edit" value="Edit Form" />
-      }
+          <input className="btn" type="submit" name="submit" value="Add Form" />
       </div>
-      {/* <p>{JSON.stringify(dailyForm[0].wakeup)}</p> */}
     </form>
   );
 }

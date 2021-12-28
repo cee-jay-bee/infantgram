@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   user,
   child,
-  dailyForm // will have an id and username if someone is logged in
+  dailyForm,
 });
 
 export default rootReducer;
