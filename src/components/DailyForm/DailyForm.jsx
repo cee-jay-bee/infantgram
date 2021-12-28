@@ -16,17 +16,50 @@ function DailyForm(props) {
   let needsArr = [];
   let feelsArr = [];
 
+  const [wakeup, setWakeup] = useState( dailyForm.wakeup );
+  const [breakfast, setBreakfast] = useState( dailyForm.breakfast );
+  const [breakfastFood, setBreakfastFood] = useState( dailyForm.breakfast_food );
+  const [parentComments, setParentComments] = useState( dailyForm.parent_comments );
+  const [diaperChangeTime, setDiaperChangeTime] = useState( dailyForm.diaper_change_time );
+  const [pickupTime, setPickUpTime] = useState( dailyForm.pickup_time );
+  const [bottleTime, setBottleTime] = useState( dailyForm.bottles );
+  const [bottleAmount, setBottleAmount] = useState( dailyForm.bottles );
+  const [napStart, setNapStart] = useState( dailyForm.naps );
+  const [napEnd, setNapEnd] = useState( dailyForm.naps );
+  const [diaperTime, setDiaperTime] = useState( dailyForm.diapers );
+  const [diaperKind, setDiaperKind] = useState( dailyForm.diapers );
+  const [needs, setNeeds] = useState( dailyForm.needs );
+  const [feelings, setFeelings] = useState( dailyForm.feelings );
+  const [teacherComments, setTeacherComments] = useState( dailyForm.teacher_comments );
+  const [feedingInfoTime, setFeedingInfoTime] = useState( dailyForm.feeding_information );
+  const [feedingInfoFood, setFeedingInfoFood] = useState( dailyForm.feeding_information );
+
+
   useEffect(()=> {
-    setNewDailyForm({...dailyForm, childID: props.child});
+    setWakeup(dailyForm.wakeup);
+    setBreakfast(dailyForm.breakfast);
+    setBreakfastFood(dailyForm.breakfast_food);
+    setParentComments(dailyForm.parent_comments);
+    setDiaperChangeTime(dailyForm.diaper_change_time);
+    setPickUpTime(dailyForm.pickup_time);
+    setBottleTime(dailyForm.bottles);
+    setBottleAmount(dailyForm.bottles);
+    setNapStart(dailyForm.naps);
+    setNapEnd(dailyForm.naps);
+    setDiaperTime(dailyForm.diapers);
+    setDiaperKind(dailyForm.diapers);
+    setTeacherComments(dailyForm.teacher_comments);
+    setFeedingInfoTime(dailyForm.feeding_information);
+    setFeedingInfoFood(dailyForm.feeding_information);
   }, [dailyForm]);
 
     //By using event.target.id, we can know which form property is being changed. Therefore, we only
     //need one function to handle the change on all input texts on the screen.
-  const handleChange = ( event ) =>{
+  // const handleChange = ( event ) =>{
     
-    setNewDailyForm( {...newDailyForm, [ event.target.id ] : event.target.value  } );
+  //   setNewDailyForm( {...newDailyForm, [ event.target.id ] : event.target.value  } );
       
-  }
+  // }
 
   const handleNeedsChange = (event) => {
     needsArr.push(event.target.id);
@@ -41,28 +74,61 @@ function DailyForm(props) {
   const changeDailyForm = (event) => {
     event.preventDefault();
 
-    console.log(newDailyForm);
+    console.log({
+      wakeup: wakeup,
+      child_id: props.child,
+      breakfast: breakfast,
+      breakfast_food: breakfastFood,
+      parent_comments: parentComments,
+      diaper_change_time: diaperChangeTime,
+      pickup_time: pickupTime,
+      bottles: {time: bottleTime, amount: bottleAmount},
+      naps: {start: napStart, end: napEnd},
+      diapers: {time: diaperTime, kind: diaperKind},
+      teacher_comments: teacherComments,
+      feeding_information: {time: feedingInfoTime, food: feedingInfoFood}
+    });
+
     console.log(needsArr);
     console.log(feelsArr);
-    if (newDailyForm.id){
-      // dispatch({
-      //   type: 'UPDATE_FORM',
-      //   payload: {
-      //     dailyForm: newDailyForm,
-      //   },
-      // });
-      console.log("test Update");
-    } else {
-      dispatch({
-        type: 'ADD_FORM',
-        payload: {
-          dailyForm: newDailyForm,
-          babyNeeds: needsArr,
-          babyFeels: feelsArr
-        },
-      });
-      console.log("test add");
-    }
+    
+    // dispatch({
+    //     type: 'UPDATE_FORM',
+    //     payload: {
+    //       wakeup: wakeup,
+    //       child_id: props.child,
+    //       breakfast: breakfast,
+    //       breakfast_food: breakfastFood,
+    //       parent_comments: parentComments,
+    //       diaper_change_time: diaperChangeTime,
+    //       pickup_time: pickupTime,
+    //       bottles: {time: bottleTime, amount: bottleAmount},
+    //       naps: {nap_start: napStart, nap_end: napEnd},
+    //       diapers: {diaper_time: diaperTime, diaper_kind: diaperKind},
+    //       teacher_comments: teacherComments,
+    //       feeding_information: {time: feedingInfoTime, food: feedingInfoFood}
+    //     },
+    //   });
+
+    // if (newDailyForm.id){
+    //   // dispatch({
+    //   //   type: 'UPDATE_FORM',
+    //   //   payload: {
+    //   //     dailyForm: newDailyForm,
+    //   //   },
+    //   // });
+    //   console.log("test Update");
+    // } else {
+    //   dispatch({
+    //     type: 'ADD_FORM',
+    //     payload: {
+    //       dailyForm: newDailyForm,
+    //       babyNeeds: needsArr,
+    //       babyFeels: feelsArr
+    //     },
+    //   });
+    //   console.log("test add");
+    // }
     
 
     // history.push('/user');
@@ -89,9 +155,9 @@ function DailyForm(props) {
             type="time"
             name="wakeup"
             id="wakeup"
-            value={dailyForm.wakeup}
+            value={wakeup}
             required
-            onChange={(event) => handleChange(event)}
+            onChange={(event) => setWakeup(event.target.value)}
           />
         </label>
       </div>
@@ -102,9 +168,9 @@ function DailyForm(props) {
             type="time"
             name="breakfast"
             id="breakfast"
-            value={dailyForm.breakfast}
+            value={breakfast}
             required
-            onChange={(event) => handleChange(event)}
+            onChange={(event) => setBreakfast(event.target.value)}
           />
         </label>
       </div>
@@ -115,9 +181,9 @@ function DailyForm(props) {
             type="text"
             name="breakfast_food"
             id="breakfast_food"
-            value={dailyForm.breakfast_food}
+            value={breakfastFood}
             required
-            onChange={(event) => handleChange(event)}
+            onChange={(event) => setBreakfastFood(event.target.value)}
           />
         </label>
       </div>
@@ -128,9 +194,9 @@ function DailyForm(props) {
             type="time"
             name="diaper_change_time"
             id="diaper_change_time"
-            value={dailyForm.diaper_change_time}
+            value={diaperChangeTime}
             required
-            onChange={(event) => handleChange(event)}
+            onChange={(event) => setDiaperChangeTime(event.target.value)}
           />
         </label>
       </div>
@@ -141,9 +207,9 @@ function DailyForm(props) {
             type="time"
             name="pickup_time"
             id="pickup_time"
-            value={dailyForm.pickup_time}
+            value={pickupTime}
             required
-            onChange={(event) => handleChange(event)}
+            onChange={(event) => setPickUpTime(event.target.value)}
           />
         </label>
       </div>
@@ -154,8 +220,8 @@ function DailyForm(props) {
             type="text"
             name="parent_comments"
             id="parent_comments"
-            value={dailyForm.parent_comments}
-            onChange={(event) => handleChange(event)}
+            value={parentComments}
+            onChange={(event) => setParentComments(event.target.value)}
           />
         </label>
       </div>
@@ -166,7 +232,8 @@ function DailyForm(props) {
             type="time"
             name="feedingInfoTime"
             id="feedingInfoTime"
-            onChange={(event) => handleChange(event)}
+            value={feedingInfoTime}
+            onChange={(event) => setFeedingInfoTime(event.target.value)}
           />
         </label>
       </div>
@@ -177,7 +244,8 @@ function DailyForm(props) {
             type="text"
             name="feedingInfoFood"
             id="feedingInfoFood"
-            onChange={(event) => handleChange(event)}
+            value={feedingInfoFood}
+            onChange={(event) => setFeedingInfoFood(event.target.value)}
           />
         </label>
       </div>
@@ -188,7 +256,8 @@ function DailyForm(props) {
             type="time"
             name="bottleTime"
             id="bottleTime"
-            onChange={(event) => handleChange(event)}
+            value={bottleTime}
+            onChange={(event) => setBottleTime(event.target.value)}
           />
         </label>
       </div>
@@ -199,7 +268,8 @@ function DailyForm(props) {
             type="text"
             name="bottleAmount"
             id="bottleAmount"
-            onChange={(event) => handleChange(event)}
+            value={bottleAmount}
+            onChange={(event) => setBottleAmount(event.target.value)}
           />
         </label>
       </div>
@@ -210,7 +280,8 @@ function DailyForm(props) {
             type="time"
             name="napStart"
             id="napStart"
-            onChange={(event) => handleChange(event)}
+            value={napStart}
+            onChange={(event) => setNapStart(event.target.value)}
           />
         </label>
       </div>
@@ -221,7 +292,8 @@ function DailyForm(props) {
             type="time"
             name="napEnd"
             id="napEnd"
-            onChange={(event) => handleChange(event)}
+            value={napEnd}
+            onChange={(event) => setNapEnd(event.target.value)}
           />
         </label>
       </div>
@@ -232,7 +304,8 @@ function DailyForm(props) {
             type="time"
             name="diaperTime"
             id="diaperTime"
-            onChange={(event) => handleChange(event)}
+            value={diaperTime}
+            onChange={(event) => setDiaperTime(event.target.value)}
           />
         </label>
       </div>
@@ -243,7 +316,8 @@ function DailyForm(props) {
             type="text"
             name="diaperKind"
             id="diaperKind"
-            onChange={(event) => handleChange(event)}
+            value={diaperKind}
+            onChange={(event) => setDiaperKind(event.target.value)}
           />
         </label>
       </div>
@@ -256,8 +330,8 @@ function DailyForm(props) {
             cols="50"
             name="teacher_comments"
             id="teacher_comments"
-            value={dailyForm.teacher_comments}
-            onChange={(event) => handleChange(event)}
+            value={teacherComments}
+            onChange={(event) => setTeacherComments(event.target.value)}
           />
         </label>
       </div>
