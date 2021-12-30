@@ -28,10 +28,26 @@ function* addForm(action) {
   }
 }
 
+function* updateForm(action) {
+  console.log("saga action.payload", action.payload);
+  try {
+    
+    const response = yield axios.put('/api/form/update', action.payload);
+
+    // now that the session has given us a user object
+    // with an id and username set the client-side user object to let
+    // the client-side code know the user is logged in
+    yield put({ type: 'FETCH_FORM', payload: action.payload.child_id })
+  } catch (error) {
+    console.log('Child Post request failed', error);
+  }
+}
+
 
 function* formSaga() {
   yield takeLatest('ADD_FORM', addForm);
   yield takeLatest('FETCH_FORM', fetchForm);
+  yield takeLatest('UPDATE_FORM', updateForm);
 }
 
 export default formSaga;

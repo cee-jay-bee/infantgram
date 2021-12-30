@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
@@ -40,55 +41,46 @@ function DailyForm(props) {
       setWakeup(dailyForm.wakeup);
     }
     if (dailyForm.breakfast){
-    setBreakfast(dailyForm.breakfast);
+      setBreakfast(dailyForm.breakfast);
     }
     if (dailyForm.breakfast_food){
-    setBreakfastFood(dailyForm.breakfast_food);
+      setBreakfastFood(dailyForm.breakfast_food);
     }
     if (dailyForm.parent_comments){
-    setParentComments(dailyForm.parent_comments);
+      setParentComments(dailyForm.parent_comments);
     }
     if (dailyForm.diaper_change_time){
-    setDiaperChangeTime(dailyForm.diaper_change_time);
+      setDiaperChangeTime(dailyForm.diaper_change_time);
     }
     if (dailyForm.pickup_time){
-    setPickUpTime(dailyForm.pickup_time);
+      setPickUpTime(dailyForm.pickup_time);
     }
-    if (dailyForm.bottles) {
-      if (dailyForm.bottles.time){
-        setBottleTime(dailyForm.bottles.time);
-      }
-    
-      if (dailyForm.bottles.amount){
-        setBottleAmount(dailyForm.bottles.amount);
-      }
+    if (dailyForm.bottle_time){
+      setBottleTime(dailyForm.bottle_time);
     }
-    if (dailyForm.naps) {
-      if (dailyForm.naps.nap_start){
-        setNapStart(dailyForm.naps.nap_start);
-      }
-      if (dailyForm.naps.nap_end){
-        setNapEnd(dailyForm.naps.nap_end);
-      }
+    if (dailyForm.bottle_amount){
+      setBottleAmount(dailyForm.bottle_amount);
     }
-    if (dailyForm.diapers) {
-      if (dailyForm.diapers.diaper_time){
-        setDiaperTime(dailyForm.diapers.diaper_time);
-      }
-      if (dailyForm.diapers.diaper_kind){
-        setDiaperKind(dailyForm.diapers.diaper_kind);
-      }
+    if (dailyForm.nap_start){
+      setNapStart(dailyForm.nap_start);
+    }
+    if (dailyForm.nap_end){
+      setNapEnd(dailyForm.nap_end);
+    }
+    if (dailyForm.diaper_time){
+      setDiaperTime(dailyForm.diaper_time);
+    }
+    if (dailyForm.diaper_kind){
+      setDiaperKind(dailyForm.diaper_kind);
     }
     if (dailyForm.teacher_comments){
     setTeacherComments(dailyForm.teacher_comments);
     }
-    if (dailyForm.feeding_information) {
-      if (dailyForm.feeding_information.time){
-        setFeedingInfoTime(dailyForm.feeding_information.time);
-      }
-      if (dailyForm.feeding_information.food){
-        setFeedingInfoFood(dailyForm.feeding_information.food);
-      }
+    if (dailyForm.feeding_time){
+      setFeedingInfoTime(dailyForm.feeding_time);
+    }
+    if (dailyForm.feeding_food){
+      setFeedingInfoFood(dailyForm.feeding_food);
     }
   }, [dailyForm]);
 
@@ -113,25 +105,37 @@ function DailyForm(props) {
   const changeDailyForm = (event) => {
     event.preventDefault();
 
-    console.log({
-      wakeup: wakeup,
-      child_id: props.child,
-      breakfast: breakfast,
-      breakfast_food: breakfastFood,
-      parent_comments: parentComments,
-      diaper_change_time: diaperChangeTime,
-      pickup_time: pickupTime,
-      bottles: {time: bottleTime, amount: bottleAmount},
-      naps: {start: napStart, end: napEnd},
-      diapers: {time: diaperTime, kind: diaperKind},
-      teacher_comments: teacherComments,
-      feeding_information: {time: feedingInfoTime, food: feedingInfoFood}
-    });
-
     console.log(needsArr);
     console.log(feelsArr);
-    
-    dispatch({
+
+    if (dailyForm.id){
+      dispatch({
+        type: 'UPDATE_FORM',
+        payload: {
+          id: dailyForm.id,
+          wakeup: wakeup,
+          child_id: props.child,
+          breakfast: breakfast,
+          breakfast_food: breakfastFood,
+          parent_comments: parentComments,
+          diaper_change_time: diaperChangeTime,
+          pickup_time: pickupTime,
+          bottle_time: bottleTime, 
+          bottle_amount: bottleAmount,
+          nap_start: napStart,
+          nap_end: napEnd,
+          diaper_time: diaperTime, 
+          diaper_kind: diaperKind,
+          teacher_comments: teacherComments,
+          feeding_time: feedingInfoTime,
+          feeding_food: feedingInfoFood,
+          babyNeeds: needsArr,
+          babyFeels: feelsArr
+        },
+      });
+      console.log("test Update");
+    } else {
+      dispatch({
         type: 'ADD_FORM',
         payload: {
           wakeup: wakeup,
@@ -141,336 +145,295 @@ function DailyForm(props) {
           parent_comments: parentComments,
           diaper_change_time: diaperChangeTime,
           pickup_time: pickupTime,
-          bottles: {time: bottleTime, amount: bottleAmount},
-          naps: {nap_start: napStart, nap_end: napEnd},
-          diapers: {diaper_time: diaperTime, diaper_kind: diaperKind},
+          bottle_time: bottleTime, 
+          bottle_amount: bottleAmount,
+          nap_start: napStart,
+          nap_end: napEnd,
+          diaper_time: diaperTime, 
+          diaper_kind: diaperKind,
           teacher_comments: teacherComments,
-          feeding_information: {time: feedingInfoTime, food: feedingInfoFood},
+          feeding_time: feedingInfoTime,
+          feeding_food: feedingInfoFood,
           babyNeeds: needsArr,
           babyFeels: feelsArr
         },
       });
-
-    // if (newDailyForm.id){
-    //   // dispatch({
-    //   //   type: 'UPDATE_FORM',
-    //   //   payload: {
-    //   //     dailyForm: newDailyForm,
-    //   //   },
-    //   // });
-    //   console.log("test Update");
-    // } else {
-    //   dispatch({
-    //     type: 'ADD_FORM',
-    //     payload: {
-    //       dailyForm: newDailyForm,
-    //       babyNeeds: needsArr,
-    //       babyFeels: feelsArr
-    //     },
-    //   });
-    //   console.log("test add");
-    // }
+      console.log("test add");
+    }
     
 
-    // history.push('/user');
+    history.push('/user');
   }; // end registerUser
 
   return (
-    
-    <form className="formPanel" onSubmit={changeDailyForm}>
-      <h2>Daily Form </h2>
-      {errors.registrationMessage && (
-        <h3 className="alert" role="alert">
-          {errors.registrationMessage}
-        </h3>
-      )}
+
+    <Form onSubmit={changeDailyForm}>
       <div>
         <center>
           <img src="/images/logo.gif" />
         </center>
       </div>
-      <div>
-        <label htmlFor="wakeup">
-          Wakeup Time:
-          <input
-            type="time"
-            name="wakeup"
-            id="wakeup"
-            value={wakeup}
-            required
-            onChange={(event) => setWakeup(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="breakfast">
-          Breakfast Time:
-          <input
-            type="time"
-            name="breakfast"
-            id="breakfast"
-            value={breakfast}
-            required
-            onChange={(event) => setBreakfast(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="breakfast_food">
-          Breakfast Food:
-          <input
-            type="text"
-            name="breakfast_food"
-            id="breakfast_food"
-            value={breakfastFood}
-            required
-            onChange={(event) => setBreakfastFood(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="diaper_change_time">
-          Diaper Change Time:
-          <input
-            type="time"
-            name="diaper_change_time"
-            id="diaper_change_time"
-            value={diaperChangeTime}
-            required
-            onChange={(event) => setDiaperChangeTime(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="pickup_time">
-          Pickup Time:
-          <input
-            type="time"
-            name="pickup_time"
-            id="pickup_time"
-            value={pickupTime}
-            required
-            onChange={(event) => setPickUpTime(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="parent_comments">
-          Special Instructions:
-          <input
-            type="text"
-            name="parent_comments"
-            id="parent_comments"
-            value={parentComments}
-            onChange={(event) => setParentComments(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="feedingInfoTime">
-          Feeding Info Time:
-          <input
-            type="time"
-            name="feedingInfoTime"
-            id="feedingInfoTime"
-            value={feedingInfoTime}
-            onChange={(event) => setFeedingInfoTime(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="feedingInfoFood">
-          What, Amount, Comments:
-          <input
-            type="text"
-            name="feedingInfoFood"
-            id="feedingInfoFood"
-            value={feedingInfoFood}
-            onChange={(event) => setFeedingInfoFood(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="bottleTime">
-          Bottle Time:
-          <input
-            type="time"
-            name="bottleTime"
-            id="bottleTime"
-            value={bottleTime}
-            onChange={(event) => setBottleTime(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="bottleAmount">
-          Amount:
-          <input
-            type="text"
-            name="bottleAmount"
-            id="bottleAmount"
-            value={bottleAmount}
-            onChange={(event) => setBottleAmount(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="napStart">
-          Nap Start:
-          <input
-            type="time"
-            name="napStart"
-            id="napStart"
-            value={napStart}
-            onChange={(event) => setNapStart(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="napEnd">
-          Nap End:
-          <input
-            type="time"
-            name="napEnd"
-            id="napEnd"
-            value={napEnd}
-            onChange={(event) => setNapEnd(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="diaperTime">
-          Diaper Time:
-          <input
-            type="time"
-            name="diaperTime"
-            id="diaperTime"
-            value={diaperTime}
-            onChange={(event) => setDiaperTime(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="diaperKind">
-          Diaper Type:
-          <input
-            type="text"
-            name="diaperKind"
-            id="diaperKind"
-            value={diaperKind}
-            onChange={(event) => setDiaperKind(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="teacher_comments">
-          Teacher Comments:
-          <textarea
-            type="text"
-            rows="4"
-            cols="50"
-            name="teacher_comments"
-            id="teacher_comments"
-            value={teacherComments}
-            onChange={(event) => setTeacherComments(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="babyNeeds">
-          Baby Needs:
-          <input
-            type="checkbox"
-            name="babyNeeds"
-            id="diapers"
-            onChange={(event) => handleNeedsChange(event)}
-          />
-          <label htmlFor="Diapers">Diapers</label>
-          <input
-            type="checkbox"
-            name="babyNeeds"
-            id="wipes"
-            onChange={(event) => handleNeedsChange(event)}
-          />
-          <label htmlFor="wipes">Wipes</label>
-          <input
-            type="checkbox"
-            name="babyNeeds"
-            id="diaperCream"
-            onChange={(event) => handleNeedsChange(event)}
-          />
-          <label htmlFor="Diaper_Cream">Diaper Cream</label>
-          <input
-            type="checkbox"
-            name="babyNeeds"
-            id="formula"
-            onChange={(event) => handleNeedsChange(event)}
-          />
-          <label htmlFor="formula">Formula</label>
-          <input
-            type="checkbox"
-            name="babyNeeds"
-            id="fingerFood"
-            onChange={(event) => handleNeedsChange(event)}
-          />
-          <label htmlFor="fingerFood">Finger Food</label>
-          <input
-            type="checkbox"
-            name="babyNeeds"
-            id="extraClothes"
-            onChange={(event) => handleNeedsChange(event)}
-          />
-          <label htmlFor="extraClothes">Extra Clothes</label>
-        </label>
-      </div>
-      <div>
-        <label htmlFor="babyFeels">
-          Baby Feels:
-          <input
-            type="checkbox"
-            name="babyFeels"
-            id="happy"
-            onChange={(event) => handleFeelsChange(event)}
-          />
-          <label htmlFor="happy">Happy</label>
-          <input
-            type="checkbox"
-            name="babyFeels"
-            id="usual"
-            onChange={(event) => handleFeelsChange(event)}
-          />
-          <label htmlFor="usual">Usual</label>
-          <input
-            type="checkbox"
-            name="babyFeels"
-            id="sensitive"
-            onChange={(event) => handleFeelsChange(event)}
-          />
-          <label htmlFor="sensitive">Sensitive</label>
-          <input
-            type="checkbox"
-            name="babyFeels"
-            id="tired"
-            onChange={(event) => handleFeelsChange(event)}
-          />
-          <label htmlFor="tired">Tired</label>
-          <input
-            type="checkbox"
-            name="babyFeels"
-            id="active"
-            onChange={(event) => handleFeelsChange(event)}
-          />
-          <label htmlFor="active">Active</label>
-        </label>
-      </div>
-      <div>
-        {
-          dailyForm.wakeup ?
-            <input className="btn" type="submit" name="edit" value="Edit Form" /> :
-            <input className="btn" type="submit" name="submit" value="Add Form" />
-        }
-      </div>
-    </form>
+      <Form.Label style={{color: 'lightgrey'}}>Parent Information</Form.Label>
+      <Row style={{backgroundColor: 'lightgrey'}}>
+        <Col id="parentInfo">
+          <Form.Group className="mb-3" controlId="wakeup">
+          <Form.Text>Child Woke Up</Form.Text>
+          <Form.Control type="time" value={wakeup}  onChange={(event) => setWakeup(event.target.value)} required />
+          </Form.Group>
+        </Col>
+        <Col>
+          <Form.Group className="mb-3" controlId="diaperChangeTime">
+          <Form.Text>Last Diaper Change</Form.Text>
+          <Form.Control type="time" value={diaperChangeTime} onChange={(event) => setDiaperChangeTime(event.target.value)} required />
+          </Form.Group>
+        </Col>
+        <Col>
+          <Form.Group className="mb-3" controlId="breakfastTime">
+          <Form.Text>Last Feeding</Form.Text>
+          <Form.Control type="time" value={breakfast} onChange={(event) => setBreakfast(event.target.value)} required />
+          </Form.Group>
+        </Col>
+        <Col>
+          <Form.Group className="mb-3" controlId="pickupTime">
+          <Form.Text>Expected Pickup Time</Form.Text>
+          <Form.Control type="time" value={pickupTime} onChange={(event) => setPickUpTime(event.target.value)} required />
+          </Form.Group>
+        </Col>
+      </Row>
+
+      <Row style={{backgroundColor: 'lightgrey'}}>
+        <Col>
+          <Form.Group className="mb-3" controlId="breakfastFood">
+          <Form.Text>Breakfast Food</Form.Text>
+          <Form.Control type="input" value={breakfastFood} onChange={(event) => setBreakfastFood(event.target.value)} required />
+          <Form.Text className="text-muted">
+            What did your child eat for breakfast?
+          </Form.Text>
+          </Form.Group>
+        </Col>
+        <Col>
+          <Form.Group className="mb-3" controlId="parentComments">
+          <Form.Text>Special Instructions</Form.Text>
+          <Form.Control type="input" value={parentComments} onChange={(event) => setParentComments(event.target.value)} required />
+          <Form.Text className="text-muted">
+            Any special Instructions for today?
+          </Form.Text>
+          </Form.Group>
+        </Col>
+      </Row>
+
+      <br />
+      <Form.Label style={{color: 'lightgrey'}}>Daycare Information</Form.Label>
+      <Row style={{backgroundColor: '#d7a9e2'}}>
+        <Col xs={2}>
+          <Form.Group className="mb-3" controlId="feedingInfoTime">
+          <Form.Text>Feeding Time</Form.Text>
+          <Form.Control type="time" value={feedingInfoTime} onChange={(event) => setFeedingInfoTime(event.target.value)} />
+          </Form.Group>
+        </Col>
+        <Col>
+          <Form.Group className="mb-3" controlId="feedingInfoFood">
+          <Form.Text>What, Amount, Comments:</Form.Text>
+          <Form.Control type="input" value={feedingInfoFood} onChange={(event) => setFeedingInfoFood(event.target.value)} />
+          </Form.Group>
+        </Col>
+      </Row>
+
+      <Row style={{backgroundColor: '#d7a9e2'}}>
+        <Col xs={2}>
+          <Form.Group className="mb-3" controlId="bottleTime">
+          <Form.Text>Bottle Time</Form.Text>
+          <Form.Control type="time" value={bottleTime} onChange={(event) => setBottleTime(event.target.value)} />
+          </Form.Group>
+        </Col>
+        <Col xs={2}>
+          <Form.Group className="mb-3" controlId="bottleAmount">
+          <Form.Text>Bottle Amount</Form.Text>
+          <Form.Control type="input" value={bottleAmount} onChange={(event) => setBottleAmount(event.target.value)} />
+          </Form.Group>
+        </Col>
+        <Col xs={2}>
+          <Form.Group className="mb-3" controlId="napStart">
+          <Form.Text>Nap Start Time</Form.Text>
+          <Form.Control type="time" value={napStart} onChange={(event) => setNapStart(event.target.value)} />
+          </Form.Group>
+        </Col>
+        <Col xs={2}>
+          <Form.Group className="mb-3" controlId="napEnd">
+          <Form.Text>Nap End Time</Form.Text>
+          <Form.Control type="time" value={napEnd} onChange={(event) => setNapEnd(event.target.value)} />
+          </Form.Group>
+        </Col>
+        <Col xs={2}>
+          <Form.Group className="mb-3" controlId="diaperTime">
+          <Form.Text>Diaper Time</Form.Text>
+          <Form.Control type="time" value={diaperTime} onChange={(event) => setDiaperTime(event.target.value)} />
+          </Form.Group>
+        </Col>
+        <Col xs={2}>
+          <Form.Group className="mb-3" controlId="diaperKind">
+          <Form.Text>Diaper Type</Form.Text>
+          <Form.Control type="input" value={diaperKind} onChange={(event) => setDiaperKind(event.target.value)} />
+          </Form.Group>
+        </Col>
+      </Row>
+
+      <Row style={{backgroundColor: '#d7a9e2'}}>
+        <Col>
+          <Form.Text className="text-bold">
+            Baby Needs:
+          </Form.Text>
+          <Form.Group className="mb-3" controlId="formBasicCheckbox">
+            <Form.Check type="checkbox" label="Diapers" />
+            <Form.Check type="checkbox" label="Wipes" />
+            <Form.Check type="checkbox" label="Diaper Cream" />
+            <Form.Check type="checkbox" label="Formula" />
+            <Form.Check type="checkbox" label="Finger Food" />
+            <Form.Check type="checkbox" label="Extra Clothes" />
+          </Form.Group>
+        </Col>
+        <Col>
+          <Form.Text className="text-bold">
+            Comments:
+          </Form.Text>
+          <Form.Group className="mb-3" controlId="teacherComments">
+          <Form.Control as="textarea" rows={6} value={teacherComments} onChange={(event) => setTeacherComments(event.target.value)}/>
+          </Form.Group>
+        </Col>
+      </Row>
+
+      <Row style={{backgroundColor: '#d7a9e2'}}>
+        <Form.Text className="text-bold">
+          Baby Seems:
+        </Form.Text>
+        <Form.Group className="mb-3" controlId="formBasicCheckbox">
+          <Form.Check type="checkbox" label="Happy" inline />
+          <Form.Check type="checkbox" label="Usual" inline />
+          <Form.Check type="checkbox" label="Sensitive" inline />
+          <Form.Check type="checkbox" label="Tired" inline />
+          <Form.Check type="checkbox" label="Active" inline />
+        </Form.Group>
+      </Row>
+      <Col lg>
+      {
+        dailyForm.wakeup ?
+          <center><Button variant="primary" type="submit" size="lg" > Edit </Button></center> :
+          <center><Button variant="primary" type="submit" size="lg" > Submit </Button> </center>
+      }
+      </Col>
+    
+  </Form>
+   
+    
+    //   <div>
+    //     <label htmlFor="teacher_comments">
+    //       Teacher Comments:
+    //       <textarea
+    //         type="text"
+    //         rows="4"
+    //         cols="50"
+    //         name="teacher_comments"
+    //         id="teacher_comments"
+    //         value={teacherComments}
+    //         onChange={(event) => setTeacherComments(event.target.value)}
+    //       />
+    //     </label>
+    //   </div>
+    //   <div>
+    //     <label htmlFor="babyNeeds">
+    //       Baby Needs:
+    //       <input
+    //         type="checkbox"
+    //         name="babyNeeds"
+    //         id="diapers"
+    //         onChange={(event) => handleNeedsChange(event)}
+    //       />
+    //       <label htmlFor="Diapers">Diapers</label>
+    //       <input
+    //         type="checkbox"
+    //         name="babyNeeds"
+    //         id="wipes"
+    //         onChange={(event) => handleNeedsChange(event)}
+    //       />
+    //       <label htmlFor="wipes">Wipes</label>
+    //       <input
+    //         type="checkbox"
+    //         name="babyNeeds"
+    //         id="diaperCream"
+    //         onChange={(event) => handleNeedsChange(event)}
+    //       />
+    //       <label htmlFor="Diaper_Cream">Diaper Cream</label>
+    //       <input
+    //         type="checkbox"
+    //         name="babyNeeds"
+    //         id="formula"
+    //         onChange={(event) => handleNeedsChange(event)}
+    //       />
+    //       <label htmlFor="formula">Formula</label>
+    //       <input
+    //         type="checkbox"
+    //         name="babyNeeds"
+    //         id="fingerFood"
+    //         onChange={(event) => handleNeedsChange(event)}
+    //       />
+    //       <label htmlFor="fingerFood">Finger Food</label>
+    //       <input
+    //         type="checkbox"
+    //         name="babyNeeds"
+    //         id="extraClothes"
+    //         onChange={(event) => handleNeedsChange(event)}
+    //       />
+    //       <label htmlFor="extraClothes">Extra Clothes</label>
+    //     </label>
+    //   </div>
+    //   <div>
+    //     <label htmlFor="babyFeels">
+    //       Baby Feels:
+    //       <input
+    //         type="checkbox"
+    //         name="babyFeels"
+    //         id="happy"
+    //         onChange={(event) => handleFeelsChange(event)}
+    //       />
+    //       <label htmlFor="happy">Happy</label>
+    //       <input
+    //         type="checkbox"
+    //         name="babyFeels"
+    //         id="usual"
+    //         onChange={(event) => handleFeelsChange(event)}
+    //       />
+    //       <label htmlFor="usual">Usual</label>
+    //       <input
+    //         type="checkbox"
+    //         name="babyFeels"
+    //         id="sensitive"
+    //         onChange={(event) => handleFeelsChange(event)}
+    //       />
+    //       <label htmlFor="sensitive">Sensitive</label>
+    //       <input
+    //         type="checkbox"
+    //         name="babyFeels"
+    //         id="tired"
+    //         onChange={(event) => handleFeelsChange(event)}
+    //       />
+    //       <label htmlFor="tired">Tired</label>
+    //       <input
+    //         type="checkbox"
+    //         name="babyFeels"
+    //         id="active"
+    //         onChange={(event) => handleFeelsChange(event)}
+    //       />
+    //       <label htmlFor="active">Active</label>
+    //     </label>
+    //   </div>
+    //   <div>
+    //     {
+    //       dailyForm.wakeup ?
+    //         <input className="btn" type="submit" name="edit" value="Edit Form" /> :
+    //         <input className="btn" type="submit" name="submit" value="Add Form" />
+    //     }
+    //   </div>
+    // </form>
   );
 }
 
