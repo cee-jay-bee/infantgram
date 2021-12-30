@@ -34,6 +34,7 @@ router.get('/:id', (req, res) => {
  */
 router.post('/', (req, res) => {
   // POST route code here
+  console.log(req.body);
   let today = new Date();
   let dd = String(today.getDate()).padStart(2, '0');
   let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -41,26 +42,26 @@ router.post('/', (req, res) => {
 
   today = yyyy + '-' + mm + '-' + dd;
 
-  const wakeup = req.body.dailyForm.wakeup;
-  const childID = req.body.dailyForm.childID;
-  const breakfast = req.body.dailyForm.breakfastTime;
-  const breakfastFood = req.body.dailyForm.breakfastFood;
-  const parentComments = req.body.dailyForm.parentComments;
-  const diaperChangeTime = req.body.dailyForm.diaperChange;
-  const pickupTime = req.body.dailyForm.pickupTime;
-  const feedingInfo = req.body.dailyForm.feedingInfo;
-  const bottles = req.body.dailyForm.bottles;
-  const naps = req.body.dailyForm.naps;
-  const diapers = req.body.dailyForm.diapers;
+  const wakeup = req.body.wakeup;
+  const childID = req.body.child_id;
+  const breakfast = req.body.breakfast;
+  const breakfastFood = req.body.breakfast_food;
+  const parentComments = req.body.parent_comments;
+  const diaperChangeTime = req.body.diaper_change_time;
+  const pickupTime = req.body.pickup_time;
+  const feedingInfo = req.body.feeding_information;
+  const bottles = req.body.bottles;
+  const naps = req.body.naps;
+  const diapers = req.body.diapers;
   const needs = req.body.babyNeeds;
   const feelings = req.body.babyFeels;
-  const teacherComments = req.body.dailyForm.teacherComments;
+  const teacherComments = req.body.teacher_comments;
   
   const queryText = `INSERT INTO "daily_forms" (date, wakeup, child_id, breakfast, breakfast_food, parent_comments, 
     diaper_change_time, pickup_time, feeding_information, bottles, naps, diapers, needs, feelings, teacher_comments)
   VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING id`;
-  pool.query(queryText, today, wakeup, childID, breakfast, breakfastFood, parentComments, diaperChangeTime, pickupTime, feedingInfo,
-  bottles, naps, diapers, needs, feelings, teacherComments)
+  pool.query(queryText, [today, wakeup, childID, breakfast, breakfastFood, parentComments, diaperChangeTime, pickupTime, feedingInfo,
+  bottles, naps, diapers, needs, feelings, teacherComments])
     .then( result => {
       res.send(result.rows);
     })

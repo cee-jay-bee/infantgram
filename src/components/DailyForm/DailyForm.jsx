@@ -16,41 +16,80 @@ function DailyForm(props) {
   let needsArr = [];
   let feelsArr = [];
 
-  const [wakeup, setWakeup] = useState( dailyForm.wakeup );
-  const [breakfast, setBreakfast] = useState( dailyForm.breakfast );
-  const [breakfastFood, setBreakfastFood] = useState( dailyForm.breakfast_food );
-  const [parentComments, setParentComments] = useState( dailyForm.parent_comments );
-  const [diaperChangeTime, setDiaperChangeTime] = useState( dailyForm.diaper_change_time );
-  const [pickupTime, setPickUpTime] = useState( dailyForm.pickup_time );
-  const [bottleTime, setBottleTime] = useState( dailyForm.bottles );
-  const [bottleAmount, setBottleAmount] = useState( dailyForm.bottles );
-  const [napStart, setNapStart] = useState( dailyForm.naps );
-  const [napEnd, setNapEnd] = useState( dailyForm.naps );
-  const [diaperTime, setDiaperTime] = useState( dailyForm.diapers );
-  const [diaperKind, setDiaperKind] = useState( dailyForm.diapers );
-  const [needs, setNeeds] = useState( dailyForm.needs );
-  const [feelings, setFeelings] = useState( dailyForm.feelings );
-  const [teacherComments, setTeacherComments] = useState( dailyForm.teacher_comments );
-  const [feedingInfoTime, setFeedingInfoTime] = useState( dailyForm.feeding_information );
-  const [feedingInfoFood, setFeedingInfoFood] = useState( dailyForm.feeding_information );
+  const [wakeup, setWakeup] = useState( '' );
+  const [breakfast, setBreakfast] = useState( '' );
+  const [breakfastFood, setBreakfastFood] = useState( '' );
+  const [parentComments, setParentComments] = useState( '' );
+  const [diaperChangeTime, setDiaperChangeTime] = useState( '' );
+  const [pickupTime, setPickUpTime] = useState( '' );
+  const [bottleTime, setBottleTime] = useState( '' );
+  const [bottleAmount, setBottleAmount] = useState( '' );
+  const [napStart, setNapStart] = useState( '' );
+  const [napEnd, setNapEnd] = useState( '' );
+  const [diaperTime, setDiaperTime] = useState( '' );
+  const [diaperKind, setDiaperKind] = useState( '' );
+  const [needs, setNeeds] = useState( '' );
+  const [feelings, setFeelings] = useState( '' );
+  const [teacherComments, setTeacherComments] = useState( '' );
+  const [feedingInfoTime, setFeedingInfoTime] = useState( '' );
+  const [feedingInfoFood, setFeedingInfoFood] = useState( '' );
 
 
   useEffect(()=> {
-    setWakeup(dailyForm.wakeup);
+    if (dailyForm.wakeup){
+      setWakeup(dailyForm.wakeup);
+    }
+    if (dailyForm.breakfast){
     setBreakfast(dailyForm.breakfast);
+    }
+    if (dailyForm.breakfast_food){
     setBreakfastFood(dailyForm.breakfast_food);
+    }
+    if (dailyForm.parent_comments){
     setParentComments(dailyForm.parent_comments);
+    }
+    if (dailyForm.diaper_change_time){
     setDiaperChangeTime(dailyForm.diaper_change_time);
+    }
+    if (dailyForm.pickup_time){
     setPickUpTime(dailyForm.pickup_time);
-    setBottleTime(dailyForm.bottles);
-    setBottleAmount(dailyForm.bottles);
-    setNapStart(dailyForm.naps);
-    setNapEnd(dailyForm.naps);
-    setDiaperTime(dailyForm.diapers);
-    setDiaperKind(dailyForm.diapers);
+    }
+    if (dailyForm.bottles) {
+      if (dailyForm.bottles.time){
+        setBottleTime(dailyForm.bottles.time);
+      }
+    
+      if (dailyForm.bottles.amount){
+        setBottleAmount(dailyForm.bottles.amount);
+      }
+    }
+    if (dailyForm.naps) {
+      if (dailyForm.naps.nap_start){
+        setNapStart(dailyForm.naps.nap_start);
+      }
+      if (dailyForm.naps.nap_end){
+        setNapEnd(dailyForm.naps.nap_end);
+      }
+    }
+    if (dailyForm.diapers) {
+      if (dailyForm.diapers.diaper_time){
+        setDiaperTime(dailyForm.diapers.diaper_time);
+      }
+      if (dailyForm.diapers.diaper_kind){
+        setDiaperKind(dailyForm.diapers.diaper_kind);
+      }
+    }
+    if (dailyForm.teacher_comments){
     setTeacherComments(dailyForm.teacher_comments);
-    setFeedingInfoTime(dailyForm.feeding_information);
-    setFeedingInfoFood(dailyForm.feeding_information);
+    }
+    if (dailyForm.feeding_information) {
+      if (dailyForm.feeding_information.time){
+        setFeedingInfoTime(dailyForm.feeding_information.time);
+      }
+      if (dailyForm.feeding_information.food){
+        setFeedingInfoFood(dailyForm.feeding_information.food);
+      }
+    }
   }, [dailyForm]);
 
     //By using event.target.id, we can know which form property is being changed. Therefore, we only
@@ -92,23 +131,25 @@ function DailyForm(props) {
     console.log(needsArr);
     console.log(feelsArr);
     
-    // dispatch({
-    //     type: 'UPDATE_FORM',
-    //     payload: {
-    //       wakeup: wakeup,
-    //       child_id: props.child,
-    //       breakfast: breakfast,
-    //       breakfast_food: breakfastFood,
-    //       parent_comments: parentComments,
-    //       diaper_change_time: diaperChangeTime,
-    //       pickup_time: pickupTime,
-    //       bottles: {time: bottleTime, amount: bottleAmount},
-    //       naps: {nap_start: napStart, nap_end: napEnd},
-    //       diapers: {diaper_time: diaperTime, diaper_kind: diaperKind},
-    //       teacher_comments: teacherComments,
-    //       feeding_information: {time: feedingInfoTime, food: feedingInfoFood}
-    //     },
-    //   });
+    dispatch({
+        type: 'ADD_FORM',
+        payload: {
+          wakeup: wakeup,
+          child_id: props.child,
+          breakfast: breakfast,
+          breakfast_food: breakfastFood,
+          parent_comments: parentComments,
+          diaper_change_time: diaperChangeTime,
+          pickup_time: pickupTime,
+          bottles: {time: bottleTime, amount: bottleAmount},
+          naps: {nap_start: napStart, nap_end: napEnd},
+          diapers: {diaper_time: diaperTime, diaper_kind: diaperKind},
+          teacher_comments: teacherComments,
+          feeding_information: {time: feedingInfoTime, food: feedingInfoFood},
+          babyNeeds: needsArr,
+          babyFeels: feelsArr
+        },
+      });
 
     // if (newDailyForm.id){
     //   // dispatch({
