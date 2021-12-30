@@ -5,12 +5,12 @@
   align-items: center;
 
   margin: 0 0 30px;
-  background-color: #00acb0;
+  background-color: #946E83;
   overflow: hidden;
 }
 
 .navbar-custom {
-  height: 200px;
+  height: 150px;
 }
 
 .nav a {
@@ -18,17 +18,18 @@
 }
 
 .nav-title {
-  font-size: 24px;
-  font-weight: 700;
+  font-size: 36px;
+  font-weight: 500;
   color: #f2f2f2;
   padding-left: 10px;
+  padding-top: 5px;
   margin: 0;
 }
 
 .navLink {
   display: inline-block;
   color: #f2f2f2;
-  background-color: #00acb0;
+  background-color: #946E83;
   text-align: center;
   padding: 24px 10px;
   text-decoration: none;
@@ -42,5 +43,12 @@
 }
 
 .navLink:hover {
-  background-color: #008183;
+  background-color: lightgrey;
+}
+
+#infantgramLogo {
+  border-radius: 10px;
+  width: 15%;
+  height: auto;
+  padding-left: 10px;
 }

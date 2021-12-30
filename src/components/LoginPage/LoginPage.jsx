@@ -13,11 +13,12 @@ function LoginPage() {
         <button
           type="button"
           className="btn btn_asLink"
+          style={{color: '#f2f2f2'}}
           onClick={() => {
             history.push('/registration');
           }}
         >
-          Register
+         not a member?
         </button>
       </center>
     </div>

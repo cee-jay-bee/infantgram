@@ -1,6 +1,6 @@
 .childCard{
     transition: .2s;
-    background-color: #28313C !important;
+    background-color: #946E83 !important;
     color: white;
     font-family: Neue-Helvetica;
     text-transform:capitalize;
@@ -8,7 +8,7 @@
 }
 
 .childCard:hover{
-    border: 5px solid #09a99e;
+    border: 5px solid #FFb2E6;
     transition: .2s;
     cursor: pointer;
 }

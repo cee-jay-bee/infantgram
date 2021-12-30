@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import './DailyForm.css';
 
 
 function DailyForm(props) {
@@ -167,12 +168,7 @@ function DailyForm(props) {
 
   return (
 
-    <Form onSubmit={changeDailyForm}>
-      <div>
-        <center>
-          <img src="/images/logo.gif" />
-        </center>
-      </div>
+    <Form onSubmit={changeDailyForm} id='dailyForm'>
       <Form.Label style={{color: 'lightgrey'}}>Parent Information</Form.Label>
       <Row style={{backgroundColor: 'lightgrey'}}>
         <Col id="parentInfo">

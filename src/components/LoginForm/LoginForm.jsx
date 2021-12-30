@@ -57,7 +57,7 @@ function LoginForm() {
         </label>
       </div>
       <div>
-        <input className="btn" type="submit" name="submit" value="Log In" />
+        <input style={{backgroundColor: '#946E83'}} className="btn" type="submit" name="submit" value="Log In" />
       </div>
     </form>
   );

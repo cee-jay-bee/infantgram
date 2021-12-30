@@ -10,7 +10,8 @@ function Nav() {
   return (
     <div className="nav navbar-custom">
       <Link to="/home">
-        <h2 className="nav-title">Prime Solo Project</h2>
+      <img id="infantgramLogo" src="/images/logo.gif" /> 
+      <span className="nav-title" inline>InfantGram</span>
       </Link>
       <div>
         {/* If no user is logged in, show these links */}
@@ -39,6 +40,7 @@ function Nav() {
         <Link className="navLink" to="/about">
           About
         </Link>
+
       </div>
     </div>
   );

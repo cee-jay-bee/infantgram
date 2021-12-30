@@ -25,9 +25,9 @@ function UserPage() {
   return (
     <main>
       <Container>
-        <h2>Welcome, {user.first_name}!</h2>
+        <h2 id="heading">Welcome, {user.first_name}!</h2>
 
-        <Button onClick={addChild}>add child</Button>
+        <Button style={{backgroundColor: "#946E83"}} onClick={addChild}>add child</Button>
         <section className="children">
           {child.map(child =>(<UserChild key={child.id} child={child} />))}
         </section>
