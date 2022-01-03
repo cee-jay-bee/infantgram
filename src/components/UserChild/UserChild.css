@@ -18,3 +18,7 @@ img{
   width: 200px;
   object-fit: cover;  /* <--- maintains the aspect ratio of the image when width & height are different */
 }
+
+.text-muted {
+  color: white;
+}
