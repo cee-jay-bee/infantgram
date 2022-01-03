@@ -46,7 +46,7 @@ function LoginForm() {
         <Col>
           <Form.Group className="mb-3" controlId="password">
           <Form.Text>Password</Form.Text>
-          <Form.Control type="text" value={password} onChange={(event) => setPassword(event.target.value)} required />
+          <Form.Control type="password" value={password} onChange={(event) => setPassword(event.target.value)} required />
           </Form.Group>
         </Col>
       </Row>
