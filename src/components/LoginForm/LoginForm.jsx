@@ -27,7 +27,7 @@ function LoginForm() {
 
   return (
     <Form onSubmit={login} className='formPanel' style={{backgroundColor: 'lightgrey'}}>
-      <center><Form.Label style={{color: 'black'}}>Log In</Form.Label></center>
+      <center><h2 style={{color: 'black'}}>Log In</h2></center>
       {errors.loginMessage && (
         <h3 className="alert" role="alert">
           {errors.loginMessage}

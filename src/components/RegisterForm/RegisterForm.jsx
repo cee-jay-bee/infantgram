@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 
 function RegisterForm() {
   const [username, setUsername] = useState('');
@@ -25,70 +26,51 @@ function RegisterForm() {
   }; // end registerUser
 
   return (
-    <form className="formPanel" onSubmit={registerUser}>
-      <h2>Register Parent</h2>
+    <Form onSubmit={registerUser} className='formPanel' style={{backgroundColor: 'lightgrey'}}>
+      <center><h2 style={{color: 'black'}}>Parent Registration</h2></center>
       {errors.registrationMessage && (
         <h3 className="alert" role="alert">
           {errors.registrationMessage}
         </h3>
       )}
-      <div>
-        <center>
-          <img src="/images/logo.gif" />
-        </center>
-      </div>
-      <div>
-        <label htmlFor="username">
-          Username:
-          <input
-            type="text"
-            name="username"
-            value={username}
-            required
-            onChange={(event) => setUsername(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="password">
-          Password:
-          <input
-            type="password"
-            name="password"
-            value={password}
-            required
-            onChange={(event) => setPassword(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="firstname">
-          First Name:
-          <input
-            type="firstname"
-            name="firstname"
-            value={firstname}
-            required
-            onChange={(event) => setFirstname(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="lastname">
-          Last Name:
-          <input
-            type="lastname"
-            name="lastname"
-            value={lastname}
-            required
-            onChange={(event) => setLastname(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <input className="btn" type="submit" name="submit" value="Register" />
-      </div>
-    </form>
+      
+      <Row >
+        <Col id="registerParent">
+          <Form.Group className="mb-3" controlId="username">
+          <Form.Text>Preferred Username</Form.Text>
+          <Form.Control type="text" value={username}  onChange={(event) => setUsername(event.target.value)} required />
+          </Form.Group>
+        </Col>
+        <Col>
+          <Form.Group className="mb-3" controlId="password">
+          <Form.Text>Password</Form.Text>
+          <Form.Control type="text" value={password} onChange={(event) => setPassword(event.target.value)} required />
+          </Form.Group>
+        </Col>
+      </Row>
+      <Row >
+        <Col>
+          <Form.Group className="mb-3" controlId="firstname">
+          <Form.Text>First Name</Form.Text>
+          <Form.Control type="text" value={firstname}  onChange={(event) => setFirstname(event.target.value)} required />
+          </Form.Group>
+        </Col>
+      </Row>
+
+      <Row>
+        <Col>
+          <Form.Group className="mb-3" controlId="lastname">
+          <Form.Text>Last Name</Form.Text>
+          <Form.Control type="text" value={lastname} onChange={(event) => setLastname(event.target.value)} required />
+          </Form.Group>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+        <center><Button variant="primary" type="submit" style={{backgroundColor: '#946E83'}} className="btn" name="submit" > Register </Button></center>
+        </Col>
+      </Row>
+    </Form>
   );
 }
 
