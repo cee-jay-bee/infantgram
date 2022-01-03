@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 
 
 function AddChildForm() {
@@ -32,72 +33,51 @@ function AddChildForm() {
   }; // end registerUser
 
   return (
-    <form className="formPanel" onSubmit={addChild}>
-      <h2>Add Child</h2>
+    <Form onSubmit={addChild} className='formPanel' style={{backgroundColor: 'lightgrey'}}>
+      <center><h2 style={{color: 'black'}}>Add Child</h2></center>
       {errors.registrationMessage && (
         <h3 className="alert" role="alert">
           {errors.registrationMessage}
         </h3>
       )}
-      <div>
-        <center>
-          <img src="/images/logo.gif" />
-        </center>
-      </div>
-      <div>
-        <label htmlFor="firstName">
-          Child's First Name:
-          <input
-            type="text"
-            name="firstName"
-            value={firstname}
-            required
-            onChange={(event) => setFirstname(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="lastName">
-          Child's Last Name:
-          <input
-            type="text"
-            name="lastName"
-            value={lastname}
-            required
-            onChange={(event) => setLastname(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="dateofbirth">
-          Date of Birth:
-          <input
-            type="date"
-            name="dateofbirth"
-            value={dateofbirth}
-            required
-            onChange={(event) => setDateOfBirth(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="allergies">
-          Allergies:
-          <textarea
-            type="text"
-            rows="4"
-            cols="50"
-            name="allergies"
-            value={allergies}
-            required
-            onChange={(event) => setAllergies(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <input className="btn" type="submit" name="submit" value="Add Child" />
-      </div>
-    </form>
+      
+      <Row >
+        <Col id="addChild">
+          <Form.Group className="mb-3" controlId="firstName">
+          <Form.Text>Child's First Name</Form.Text>
+          <Form.Control type="text" value={firstname}  onChange={(event) => setFirstname(event.target.value)} required />
+          </Form.Group>
+        </Col>
+        <Col>
+          <Form.Group className="mb-3" controlId="lastName">
+          <Form.Text>Child's Last Name</Form.Text>
+          <Form.Control type="text" value={lastname} onChange={(event) => setLastname(event.target.value)} required />
+          </Form.Group>
+        </Col>
+      </Row>
+      <Row >
+        <Col>
+          <Form.Group className="mb-3" controlId="dateOfBirth">
+          <Form.Text>Child's Date of Birth</Form.Text>
+          <Form.Control type="date" value={dateofbirth}  onChange={(event) => setDateOfBirth(event.target.value)} required />
+          </Form.Group>
+        </Col>
+      </Row>
+
+      <Row>
+        <Col>
+          <Form.Group className="mb-3" controlId="allergies">
+          <Form.Text>Child's Allergies</Form.Text>
+          <Form.Control as="textarea" rows={3} value={allergies} onChange={(event) => setAllergies(event.target.value)} required />
+          </Form.Group>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+        <center><Button variant="primary" type="submit" style={{backgroundColor: '#946E83'}} className="btn" name="submit" > Add </Button></center>
+        </Col>
+      </Row>
+    </Form>
   );
 }
 

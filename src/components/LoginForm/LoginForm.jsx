@@ -35,7 +35,7 @@ function LoginForm() {
       )}
       
       <Row >
-        <Col id="parentInfo">
+        <Col id="loginForm">
           <Form.Group className="mb-3" controlId="username">
           <Form.Text>Username</Form.Text>
           <Form.Control type="text" value={username}  onChange={(event) => setUsername(event.target.value)} required />
@@ -57,41 +57,6 @@ function LoginForm() {
       </Row>
     </Form>
     
-    // <form className="formPanel" onSubmit={login}>
-    //   <h2>Login</h2>
-    //   {errors.loginMessage && (
-    //     <h3 className="alert" role="alert">
-    //       {errors.loginMessage}
-    //     </h3>
-    //   )}
-    //   <div>
-    //     <label htmlFor="username">
-    //       Username:
-    //       <input
-    //         type="text"
-    //         name="username"
-    //         required
-    //         value={username}
-    //         onChange={(event) => setUsername(event.target.value)}
-    //       />
-    //     </label>
-    //   </div>
-    //   <div>
-    //     <label htmlFor="password">
-    //       Password:
-    //       <input
-    //         type="password"
-    //         name="password"
-    //         required
-    //         value={password}
-    //         onChange={(event) => setPassword(event.target.value)}
-    //       />
-    //     </label>
-    //   </div>
-    //   <div>
-    //     <input style={{backgroundColor: '#946E83'}} className="btn" type="submit" name="submit" value="Log In" />
-    //   </div>
-    // </form>
   );
 }
 

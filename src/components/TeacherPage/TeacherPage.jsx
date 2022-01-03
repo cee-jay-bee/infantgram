@@ -25,7 +25,7 @@ function TeacherPage() {
     
     <main>
       <Container>
-        <h2>Classroom</h2>
+        <h2 style={{color: 'lightgrey'}}>Classroom</h2>
 
         <section className="children">
           {child.map(child =>(<UserChild key={child.id} child={child} />))}
