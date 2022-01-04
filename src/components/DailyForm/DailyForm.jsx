@@ -392,8 +392,8 @@ function DailyForm(props) {
       <Col lg>
       {
         dailyForm.wakeup ?
-          <center><Button variant="primary" type="submit" size="lg" > Edit </Button></center> :
-          <center><Button variant="primary" type="submit" size="lg" > Submit </Button> </center>
+          <center><Button variant="primary" type="submit" size="lg" style={{backgroundColor: '#946E83'}}> Edit </Button></center> :
+          <center><Button variant="primary" type="submit" size="lg" style={{backgroundColor: '#946E83'}}> Submit </Button> </center>
       }
       </Col>
     
