@@ -9,7 +9,7 @@ function Nav() {
 
   return (
     <div className="nav navbar-custom">
-      <Link to="/home">
+      <Link to="/">
       <img id="infantgramLogo" src="/images/logo.gif" /> 
       <span className="nav-title" inline>InfantGram</span>
       </Link>

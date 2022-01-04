@@ -85,14 +85,6 @@ function DailyForm(props) {
     }
   }, [dailyForm]);
 
-    //By using event.target.id, we can know which form property is being changed. Therefore, we only
-    //need one function to handle the change on all input texts on the screen.
-  // const handleChange = ( event ) =>{
-    
-  //   setNewDailyForm( {...newDailyForm, [ event.target.id ] : event.target.value  } );
-      
-  // }
-
   const handleNeedsChange = (event) => {
     needsArr.push(event.target.id);
     console.log(needsArr);
@@ -319,117 +311,6 @@ function DailyForm(props) {
       </Col>
     
   </Form>
-   
-    
-    //   <div>
-    //     <label htmlFor="teacher_comments">
-    //       Teacher Comments:
-    //       <textarea
-    //         type="text"
-    //         rows="4"
-    //         cols="50"
-    //         name="teacher_comments"
-    //         id="teacher_comments"
-    //         value={teacherComments}
-    //         onChange={(event) => setTeacherComments(event.target.value)}
-    //       />
-    //     </label>
-    //   </div>
-    //   <div>
-    //     <label htmlFor="babyNeeds">
-    //       Baby Needs:
-    //       <input
-    //         type="checkbox"
-    //         name="babyNeeds"
-    //         id="diapers"
-    //         onChange={(event) => handleNeedsChange(event)}
-    //       />
-    //       <label htmlFor="Diapers">Diapers</label>
-    //       <input
-    //         type="checkbox"
-    //         name="babyNeeds"
-    //         id="wipes"
-    //         onChange={(event) => handleNeedsChange(event)}
-    //       />
-    //       <label htmlFor="wipes">Wipes</label>
-    //       <input
-    //         type="checkbox"
-    //         name="babyNeeds"
-    //         id="diaperCream"
-    //         onChange={(event) => handleNeedsChange(event)}
-    //       />
-    //       <label htmlFor="Diaper_Cream">Diaper Cream</label>
-    //       <input
-    //         type="checkbox"
-    //         name="babyNeeds"
-    //         id="formula"
-    //         onChange={(event) => handleNeedsChange(event)}
-    //       />
-    //       <label htmlFor="formula">Formula</label>
-    //       <input
-    //         type="checkbox"
-    //         name="babyNeeds"
-    //         id="fingerFood"
-    //         onChange={(event) => handleNeedsChange(event)}
-    //       />
-    //       <label htmlFor="fingerFood">Finger Food</label>
-    //       <input
-    //         type="checkbox"
-    //         name="babyNeeds"
-    //         id="extraClothes"
-    //         onChange={(event) => handleNeedsChange(event)}
-    //       />
-    //       <label htmlFor="extraClothes">Extra Clothes</label>
-    //     </label>
-    //   </div>
-    //   <div>
-    //     <label htmlFor="babyFeels">
-    //       Baby Feels:
-    //       <input
-    //         type="checkbox"
-    //         name="babyFeels"
-    //         id="happy"
-    //         onChange={(event) => handleFeelsChange(event)}
-    //       />
-    //       <label htmlFor="happy">Happy</label>
-    //       <input
-    //         type="checkbox"
-    //         name="babyFeels"
-    //         id="usual"
-    //         onChange={(event) => handleFeelsChange(event)}
-    //       />
-    //       <label htmlFor="usual">Usual</label>
-    //       <input
-    //         type="checkbox"
-    //         name="babyFeels"
-    //         id="sensitive"
-    //         onChange={(event) => handleFeelsChange(event)}
-    //       />
-    //       <label htmlFor="sensitive">Sensitive</label>
-    //       <input
-    //         type="checkbox"
-    //         name="babyFeels"
-    //         id="tired"
-    //         onChange={(event) => handleFeelsChange(event)}
-    //       />
-    //       <label htmlFor="tired">Tired</label>
-    //       <input
-    //         type="checkbox"
-    //         name="babyFeels"
-    //         id="active"
-    //         onChange={(event) => handleFeelsChange(event)}
-    //       />
-    //       <label htmlFor="active">Active</label>
-    //     </label>
-    //   </div>
-    //   <div>
-    //     {
-    //       dailyForm.wakeup ?
-    //         <input className="btn" type="submit" name="edit" value="Edit Form" /> :
-    //         <input className="btn" type="submit" name="submit" value="Add Form" />
-    //     }
-    //   </div>
-    // </form>
   );
 }
 

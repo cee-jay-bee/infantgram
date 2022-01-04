@@ -58,7 +58,7 @@ function UserChild(props) {
         </Card.Body>
       </Card>
       {user.role === 'parent' ?
-        <Button variant="primary" style={{backgroundColor: 'lightgrey', color:'black', width: '15rem'}} className="btn" onClick={() => deleteChild(props.child.id)} > Delete </Button> :
+        <Button variant="primary" style={{backgroundColor: 'lightgrey', color:'black', width: '15rem'}} className="btn" onClick={() => deleteChild(props.child.id)} > Remove from Daycare </Button> :
         <p></p>
       }
     </Col>
