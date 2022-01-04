@@ -19,7 +19,12 @@ const formReducer = (state =
       needs_cream: null,
       needs_formula: null,
       needs_food: null,
-      needs_clothes: null}, action) => {
+      needs_clothes: null,
+      feels_happy: null,
+      feels_usual: null,
+      feels_sensitive: null,
+      feels_tired: null,
+      feels_active: null}, action) => {
         switch (action.type) {
           case 'SET_FORM':
           if (action.payload.length === 0) {
@@ -48,7 +53,12 @@ const formReducer = (state =
               needs_cream: null,
               needs_formula: null,
               needs_food: null,
-              needs_clothes: null};
+              needs_clothes: null,
+              feels_happy: null,
+              feels_usual: null,
+              feels_sensitive: null,
+              feels_tired: null,
+              feels_active: null};
           default:
             return state;
   }

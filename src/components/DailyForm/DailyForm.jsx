@@ -13,10 +13,6 @@ function DailyForm(props) {
   const user = useSelector((store) => store.user);
   const child = useSelector((store)=> store.child);
   const dailyForm = useSelector((store) => store.dailyForm);
- 
-  const [ newDailyForm, setNewDailyForm ] = useState( {} );
-  let needsArr = [];
-  let feelsArr = [];
 
   const [wakeup, setWakeup] = useState( '' );
   const [breakfast, setBreakfast] = useState( '' );
@@ -36,8 +32,11 @@ function DailyForm(props) {
   const [formulaChecked, setFormulaChecked] = useState( false );
   const [clothesChecked, setClothesChecked] = useState( false );
   const [foodChecked, setFoodChecked] = useState( false );
-  const [needs, setNeeds] = useState( '' );
-  const [feelings, setFeelings] = useState( '' );
+  const [happyChecked, setHappyChecked] = useState( false );
+  const [usualChecked, setUsualChecked] = useState( false );
+  const [sensitiveChecked, setSensitiveChecked] = useState( false );
+  const [tiredChecked, setTiredChecked] = useState( false );
+  const [activeChecked, setActiveChecked] = useState( false );
   const [teacherComments, setTeacherComments] = useState( '' );
   const [feedingInfoTime, setFeedingInfoTime] = useState( '' );
   const [feedingInfoFood, setFeedingInfoFood] = useState( '' );
@@ -107,6 +106,21 @@ function DailyForm(props) {
     if (dailyForm.needs_food === true){
       setFoodChecked(true);
     }
+    if (dailyForm.feels_happy === true){
+      setHappyChecked(true);
+    }
+    if (dailyForm.feels_usual === true ){
+      setUsualChecked(true);
+    }
+    if (dailyForm.feels_sensitive === true){
+      setSensitiveChecked(true);
+    }
+    if (dailyForm.feels_tired === true){
+      setTiredChecked(true);
+    }
+    if (dailyForm.feels_active === true){
+      setActiveChecked(true);
+    }
   }, [dailyForm]);
 
   const handleDiaperChange = () => {
@@ -133,11 +147,28 @@ function DailyForm(props) {
     setFormulaChecked(!formulaChecked);
   }
 
+  const handleHappyChange = () => {
+    setHappyChecked(!happyChecked);
+  }
+
+  const handleUsualChange = () => {
+    setUsualChecked(!usualChecked);
+  }
+
+  const handleSensitiveChange = () => {
+    setSensitiveChecked(!sensitiveChecked);
+  }
+
+  const handleTiredChange = () => {
+    setTiredChecked(!tiredChecked);
+  }
+
+  const handleActiveChange = () => {
+    setActiveChecked(!activeChecked);
+  }
+
   const changeDailyForm = (event) => {
     event.preventDefault();
-
-    console.log(needsArr);
-    console.log(feelsArr);
 
     if (dailyForm.id){
       dispatch({
@@ -165,8 +196,12 @@ function DailyForm(props) {
           needs_cream: creamChecked,
           needs_formula: formulaChecked,
           needs_food: foodChecked,
-          needs_clothes: clothesChecked
-
+          needs_clothes: clothesChecked,
+          feels_happy: happyChecked,
+          feels_usual: usualChecked,
+          feels_sensitive: sensitiveChecked,
+          feels_tired: tiredChecked,
+          feels_active: activeChecked
         },
       });
       console.log("test Update");
@@ -195,7 +230,12 @@ function DailyForm(props) {
           needs_cream: creamChecked,
           needs_formula: formulaChecked,
           needs_food: foodChecked,
-          needs_clothes: clothesChecked
+          needs_clothes: clothesChecked,
+          feels_happy: happyChecked,
+          feels_usual: usualChecked,
+          feels_sensitive: sensitiveChecked,
+          feels_tired: tiredChecked,
+          feels_active: activeChecked
         },
       });
       console.log("test add");
@@ -342,11 +382,11 @@ function DailyForm(props) {
           Baby Seems:
         </Form.Text>
         <Form.Group className="mb-3" controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" label="Happy" inline />
-          <Form.Check type="checkbox" label="Usual" inline />
-          <Form.Check type="checkbox" label="Sensitive" inline />
-          <Form.Check type="checkbox" label="Tired" inline />
-          <Form.Check type="checkbox" label="Active" inline />
+          <Form.Check type="checkbox" label="Happy" inline checked={happyChecked} onChange={handleHappyChange}/>
+          <Form.Check type="checkbox" label="Usual" inline checked={usualChecked} onChange={handleUsualChange}/>
+          <Form.Check type="checkbox" label="Sensitive" inline checked={sensitiveChecked} onChange={handleSensitiveChange}/>
+          <Form.Check type="checkbox" label="Tired" inline checked={tiredChecked} onChange={handleTiredChange}/>
+          <Form.Check type="checkbox" label="Active" inline checked={activeChecked} onChange={handleActiveChange}/>
         </Form.Group>
       </Row>
       <Col lg>
