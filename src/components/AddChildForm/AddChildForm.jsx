@@ -34,7 +34,7 @@ function AddChildForm() {
 
   return (
     <Form onSubmit={addChild} className='formPanel' style={{backgroundColor: 'lightgrey'}}>
-      <center><h2 style={{color: 'black'}}>Add Child</h2></center>
+      <center><h2 style={{color: 'black', fontFamily: 'cursive'}}>Add Child</h2></center>
       {errors.registrationMessage && (
         <h3 className="alert" role="alert">
           {errors.registrationMessage}

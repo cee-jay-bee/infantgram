@@ -52,7 +52,7 @@ function UserChild(props) {
           src={props.child.image_path}
         />
         <Card.Body>
-          <Card.Title>{props.child.first_name} {props.child.last_name}</Card.Title>
+          <Card.Title style={{fontFamily: 'monospace'}}>{props.child.first_name} {props.child.last_name}</Card.Title>
           <Card.Text className="mb-2">Allergies:<br />
           {props.child.allergies}</Card.Text>
         </Card.Body>
