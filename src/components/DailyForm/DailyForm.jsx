@@ -30,6 +30,12 @@ function DailyForm(props) {
   const [napEnd, setNapEnd] = useState( '' );
   const [diaperTime, setDiaperTime] = useState( '' );
   const [diaperKind, setDiaperKind] = useState( '' );
+  const [diapersChecked, setDiapersChecked] = useState( false );
+  const [wipesChecked, setWipesChecked] = useState( false );
+  const [creamChecked, setCreamChecked] = useState( false );
+  const [formulaChecked, setFormulaChecked] = useState( false );
+  const [clothesChecked, setClothesChecked] = useState( false );
+  const [foodChecked, setFoodChecked] = useState( false );
   const [needs, setNeeds] = useState( '' );
   const [feelings, setFeelings] = useState( '' );
   const [teacherComments, setTeacherComments] = useState( '' );
@@ -83,16 +89,48 @@ function DailyForm(props) {
     if (dailyForm.feeding_food){
       setFeedingInfoFood(dailyForm.feeding_food);
     }
+    if (dailyForm.needs_diapers === true){
+      setDiapersChecked(true);
+    }
+    if (dailyForm.needs_wipes === true){
+      setWipesChecked(true);
+    }
+    if (dailyForm.needs_cream === true ){
+      setCreamChecked(true);
+    }
+    if (dailyForm.needs_clothes === true){
+      setClothesChecked(true);
+    }
+    if (dailyForm.needs_formula === true){
+      setFormulaChecked(true);
+    }
+    if (dailyForm.needs_food === true){
+      setFoodChecked(true);
+    }
   }, [dailyForm]);
 
-  const handleNeedsChange = (event) => {
-    needsArr.push(event.target.id);
-    console.log(needsArr);
+  const handleDiaperChange = () => {
+    setDiapersChecked(!diapersChecked);
   }
 
-  const handleFeelsChange = (event) => {
-    feelsArr.push(event.target.id);
-    console.log(feelsArr);
+  const handleWipesChange = () => {
+    setWipesChecked(!wipesChecked);
+  }
+
+  const handleCreamChange = () => {
+    setCreamChecked(!creamChecked);
+  }
+
+  const handleFoodChange = () => {
+    setFoodChecked(!foodChecked);
+  }
+
+  const handleClothesChange = () => {
+    setClothesChecked(!clothesChecked);
+  }
+
+  const handleFormulaChange = () => {
+    setFormulaChecked(!formulaChecked);
   }
 
   const changeDailyForm = (event) => {
@@ -122,8 +160,13 @@ function DailyForm(props) {
           teacher_comments: teacherComments,
           feeding_time: feedingInfoTime,
           feeding_food: feedingInfoFood,
-          babyNeeds: needsArr,
-          babyFeels: feelsArr
+          needs_diapers: diapersChecked,
+          needs_wipes: wipesChecked,
+          needs_cream: creamChecked,
+          needs_formula: formulaChecked,
+          needs_food: foodChecked,
+          needs_clothes: clothesChecked
+
         },
       });
       console.log("test Update");
@@ -147,8 +190,12 @@ function DailyForm(props) {
           teacher_comments: teacherComments,
           feeding_time: feedingInfoTime,
           feeding_food: feedingInfoFood,
-          babyNeeds: needsArr,
-          babyFeels: feelsArr
+          needs_diapers: diapersChecked,
+          needs_wipes: wipesChecked,
+          needs_cream: creamChecked,
+          needs_formula: formulaChecked,
+          needs_food: foodChecked,
+          needs_clothes: clothesChecked
         },
       });
       console.log("test add");
@@ -272,12 +319,12 @@ function DailyForm(props) {
             Baby Needs:
           </Form.Text>
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Diapers" />
-            <Form.Check type="checkbox" label="Wipes" />
-            <Form.Check type="checkbox" label="Diaper Cream" />
-            <Form.Check type="checkbox" label="Formula" />
-            <Form.Check type="checkbox" label="Finger Food" />
-            <Form.Check type="checkbox" label="Extra Clothes" />
+            <Form.Check type="checkbox" label="Diapers" checked={diapersChecked} onChange={handleDiaperChange} />
+            <Form.Check type="checkbox" label="Wipes" checked={wipesChecked} onChange={handleWipesChange} />
+            <Form.Check type="checkbox" label="Diaper Cream" checked={creamChecked} onChange={handleCreamChange} />
+            <Form.Check type="checkbox" label="Formula" checked={formulaChecked} onChange={handleFormulaChange} />
+            <Form.Check type="checkbox" label="Finger Food" checked={foodChecked} onChange={handleFoodChange} />
+            <Form.Check type="checkbox" label="Extra Clothes" checked={clothesChecked} onChange={handleClothesChange} />
           </Form.Group>
         </Col>
         <Col>
