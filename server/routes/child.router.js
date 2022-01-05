@@ -49,11 +49,12 @@ router.post('/', rejectUnauthenticated, (req, res, next) => {
   const dateOfBirth = req.body.dateOfBirth;
   const allergies = req.body.allergies;
   const parentID = req.body.parentID;
+  const imagePath = req.body.image_path;
 
-  const queryText = `INSERT INTO "child" (first_name, last_name, parent_id, birth_date, allergies)
-    VALUES ($1, $2, $3, $4, $5) RETURNING id`;
+  const queryText = `INSERT INTO "child" (first_name, last_name, parent_id, image_path, birth_date, allergies)
+    VALUES ($1, $2, $3, $4, $5, $6) RETURNING id`;
   pool
-    .query(queryText, [firstName, lastName, parentID, dateOfBirth, allergies])
+    .query(queryText, [firstName, lastName, parentID, imagePath, dateOfBirth, allergies])
     .then(() => res.sendStatus(201))
     .catch((err) => {
       console.log('User registration failed: ', err);

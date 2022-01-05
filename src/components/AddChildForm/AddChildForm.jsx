@@ -9,11 +9,20 @@ function AddChildForm() {
   const [lastname, setLastname] = useState('');
   const [dateofbirth, setDateOfBirth] = useState('');
   const [allergies, setAllergies] = useState('');
+  const [imagePath, setImagePath] = useState('');
   
   const errors = useSelector((store) => store.errors);
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const history = useHistory();
+
+  const addChildDefaults = () => {
+    setFirstname('Mia');
+    setLastname('Barnes');
+    setDateOfBirth('2021-11-15');
+    setAllergies('Strawberries');
+    setImagePath('/images/testaddmia.jpg');
+  }
 
   const addChild = (event) => {
     event.preventDefault();
@@ -25,6 +34,7 @@ function AddChildForm() {
         lastName: lastname,
         dateOfBirth: dateofbirth,
         allergies: allergies,
+        image_path: imagePath,
         parentID: user.id
       },
     });
@@ -34,7 +44,7 @@ function AddChildForm() {
 
   return (
     <Form onSubmit={addChild} className='formPanel' style={{backgroundColor: 'lightgrey'}}>
-      <center><h2 style={{color: 'black', fontFamily: 'cursive'}}>Add Child</h2></center>
+      <center><h2 style={{color: 'black', fontFamily: 'cursive'}} onClick={addChildDefaults}>Add Child</h2></center>
       {errors.registrationMessage && (
         <h3 className="alert" role="alert">
           {errors.registrationMessage}
@@ -56,10 +66,16 @@ function AddChildForm() {
         </Col>
       </Row>
       <Row >
-        <Col>
+        <Col xs={6}>
           <Form.Group className="mb-3" controlId="dateOfBirth">
-          <Form.Text>Child's Date of Birth</Form.Text>
+          <Form.Text>Date of Birth</Form.Text>
           <Form.Control type="date" value={dateofbirth}  onChange={(event) => setDateOfBirth(event.target.value)} required />
+          </Form.Group>
+        </Col>
+        <Col xs={6}>
+          <Form.Group className="mb-3" controlId="imagepath">
+          <Form.Text>Child's Image</Form.Text>
+          <Form.Control type="input" value={imagePath}  onChange={(event) => setImagePath(event.target.value)} required />
           </Form.Group>
         </Col>
       </Row>
