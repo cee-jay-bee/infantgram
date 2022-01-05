@@ -26,6 +26,10 @@ function UserChild(props) {
 
   const deleteChild = (childID) => {
     console.log(childID);
+    dispatch({type: 'DELETE_CHILD',
+      payload: {childID: childID,
+        parentID: user.id}
+    })
   }
 
   const getForm = (childID) => {

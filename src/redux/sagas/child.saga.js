@@ -37,11 +37,26 @@ function* addChild(action) {
   }
 }
 
+function* deleteChild(action) {
+  try {
+    console.log(action.payload);
+    const response = yield axios.delete(`/api/child/${action.payload.childID}`);
+
+    // now that the session has given us a user object
+    // with an id and username set the client-side user object to let
+    // the client-side code know the user is logged in
+    yield put({ type: 'FETCH_CHILD', payload: action.payload.parentID})
+  } catch (error) {
+    console.log('Child Post request failed', error);
+  }
+}
+
 
 function* childSaga() {
   yield takeLatest('ADD_CHILD', addChild);
   yield takeLatest('FETCH_CHILD', fetchChild);
   yield takeLatest('FETCH_CHILDREN', fetchChildren);
+  yield takeLatest('DELETE_CHILD', deleteChild);
 }
 
 export default childSaga;

@@ -61,6 +61,21 @@ router.post('/', rejectUnauthenticated, (req, res, next) => {
     });
 });
 
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
+  // GET route code here
+  console.log("child id", req.params.id);
+  
+  const query = `DELETE FROM "child" WHERE id = ${req.params.id}`;
+  pool.query(query)
+    .then( result => {
+      res.send(result.rows);
+    })
+    .catch(err => {
+      console.log('ERROR: Get one child', err);
+      res.sendStatus(500)
+    })
+});
+
 
 
 module.exports = router;
