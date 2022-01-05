@@ -167,6 +167,26 @@ function DailyForm(props) {
     setActiveChecked(!activeChecked);
   }
 
+  const parentInfoDefaults = () => {
+    setWakeup('07:00');
+    setBreakfast('07:15');
+    setBreakfastFood('Oatmeal, Blueberries, Milk');
+    setParentComments('Has a doctor appt today at 1PM');
+    setDiaperChangeTime('07:45');
+    setPickUpTime('16:45');
+  }
+
+  const daycareInfoDefaults = () => {
+    setNapStart('12:15');
+    setNapEnd('13:25');
+    setDiaperTime('11:00');
+    setDiaperKind('BM');
+    setTeacherComments('Mia had a wonderful day at Daycare today. She loves to sing "Itsy Bitsy Spider"');
+    setDiapersChecked(true);
+    setFormulaChecked(true);
+    setHappyChecked(true);
+  }
+
   const changeDailyForm = (event) => {
     event.preventDefault();
 
@@ -248,7 +268,7 @@ function DailyForm(props) {
   return (
 
     <Form onSubmit={changeDailyForm} id='dailyForm'>
-      <Form.Label style={{color: 'lightgrey'}}>Parent Information</Form.Label>
+      <Form.Label style={{color: 'lightgrey'}} onClick={parentInfoDefaults}>Parent Information</Form.Label>
       <Row style={{backgroundColor: 'lightgrey'}}>
         <Col id="parentInfo">
           <Form.Group className="mb-3" controlId="wakeup">
@@ -298,7 +318,7 @@ function DailyForm(props) {
       </Row>
 
       <br />
-      <Form.Label style={{color: 'lightgrey'}}>Daycare Information</Form.Label>
+      <Form.Label style={{color: 'lightgrey'}} onClick={daycareInfoDefaults}>Daycare Information</Form.Label>
       <Row style={{backgroundColor: '#d7a9e2'}}>
         <Col xs={2}>
           <Form.Group className="mb-3" controlId="feedingInfoTime">
