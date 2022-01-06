@@ -171,7 +171,7 @@ function DailyForm(props) {
     setWakeup('07:00');
     setBreakfast('07:15');
     setBreakfastFood('Oatmeal, Blueberries, Milk');
-    setParentComments('Has a doctor appt today at 1PM');
+    setParentComments('Has a doctor appt today at 11AM');
     setDiaperChangeTime('07:45');
     setPickUpTime('16:45');
   }
